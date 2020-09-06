@@ -9,6 +9,7 @@ public class TileSpawner : MonoBehaviour
     public GameObject currentSeedText;
     public GameObject heightField;
     public GameObject widthField;
+    public GameObject tilePicker;
     public Sprite[] tileLibrary;
     public Sprite[] altTileLibrary;
 
@@ -58,6 +59,12 @@ public class TileSpawner : MonoBehaviour
         mutationType = (MutationType)t;
     }
 
+    int geneBrushIndex;
+    public void SetGeneBrushIndex(int index)
+    {
+        geneBrushIndex = index;
+    }
+
     Texture2D[,] textures;
     Cell[,] cells;
     GameObject[,] chunks;
@@ -71,6 +78,7 @@ public class TileSpawner : MonoBehaviour
     Random.State tileMappingState;
     bool tileMappingStateInitialized = false;
 
+    FPSWatcher FPSWatcher { get; set; }
 
     public void SetNewWidth(string s)
     {
@@ -161,6 +169,20 @@ public class TileSpawner : MonoBehaviour
         Initialize();
     }
 
+    void InitializeTilePickerDropdown()
+    {
+        Dropdown dropdown = tilePicker.GetComponent<Dropdown>();
+
+        dropdown.ClearOptions();
+
+        foreach (Sprite sprite in TileLibrary)
+        {
+            dropdown.options.Add(new Dropdown.OptionData(sprite));
+        }
+
+        dropdown.RefreshShownValue();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -170,11 +192,15 @@ public class TileSpawner : MonoBehaviour
         field = widthField.GetComponent<InputField>();
         field.SetTextWithoutNotify(width.ToString());
 
+        FPSWatcher = GetComponent<FPSWatcher>();
+
         Initialize();
     }
 
     void Initialize()
     {
+        InitializeTilePickerDropdown();
+
         if(!tileMappingStateInitialized)
         {
             tileMappingState = Random.state;
@@ -230,7 +256,7 @@ public class TileSpawner : MonoBehaviour
 
                 textures[i, j].filterMode = FilterMode.Point;
 
-                Sprite sprite = Sprite.Create(textures[i, j], new Rect(0, 0, textures[i, j].width, textures[i, j].height), new Vector2(0.5f, 0.5f), 1);
+                Sprite sprite = Sprite.Create(textures[i, j], new Rect(0, 0, textures[i, j].width, textures[i, j].height), new Vector2(0f, 0f), 1);
                 Debug.Assert(sprite != null);
 
                 chunks[i, j] = GameObject.Instantiate(chunkPrefab);
@@ -326,19 +352,53 @@ public class TileSpawner : MonoBehaviour
             r = DefaultSprite.textureRect;
         }
 
-        textures[textureX, textureY].SetPixels(chunkX, chunkY, tileWidth, tileHeight, t.GetPixels((int)r.x, (int)r.y, (int)r.width, (int)r.height));
+        textures[textureX, textureY].SetPixels(chunkX, chunkY,
+            tileWidth, tileHeight,
+            t.GetPixels((int)r.x, (int)r.y, (int)r.width, (int)r.height));
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (nextGenerationIndex > 0)
+        bool applyTextures = false;
+
+        if(Input.GetKey(KeyCode.Space))
         {
-            for(int i = 0; i < 512; ++i)
+            Vector3 currentPosition = Input.mousePosition;
+            currentPosition.z = -Camera.main.transform.position.z;
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(currentPosition);
+
+            int x = (int)worldPosition.x / tileWidth;
+            int y = (int)worldPosition.y / tileHeight;
+
+            if(x >= 0 && x < width && y >= 0 && y < height)
             {
-                RunBarricelli();
+                AssignGeneToTile(x, y, geneBrushIndex + GetMinGene(), Cell.CellStatus.Normal);
+                applyTextures = true;
             }
 
+            if(currentGenerationIndex > y)
+            {
+                currentGenerationIndex = y;
+                nextGenerationIndex = y + 1;
+            }
+        }
+
+        //if (nextGenerationIndex > 0)
+        {
+            int allowedOperations = FPSWatcher.AllowedOperations;
+            int operations = 0;
+            for(int i = 0; operations < allowedOperations; ++i)
+            {
+                operations += RunBarricelli();
+                ++operations;
+            }
+
+            applyTextures = true;
+        }
+
+        if (applyTextures)
+        {
             foreach (Texture2D t in textures)
             {
                 t.Apply();
@@ -346,26 +406,30 @@ public class TileSpawner : MonoBehaviour
         }
     }
 
-    public void RunBarricelli()
+    int RunBarricelli()
     {
         if(nextGenerationIndex >= height)
         {
-            return;
+            return 0;
         }
 
-        SimulateRow();
+        int operations = SimulateRow();
 
         ++currentGenerationIndex;
         ++nextGenerationIndex;
+
+        return operations;
     }
 
-    void SimulateRow()
+    int SimulateRow()
     {
         Shuffle(randomShiftIndexArray);
         for(int i = 0; i < width; ++i)
         {
             Shift(randomShiftIndexArray[i]);
         }
+
+        return 1;
     }
 
     private void Shift(int i)
