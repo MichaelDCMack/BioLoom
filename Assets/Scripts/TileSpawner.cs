@@ -7,10 +7,14 @@ public class TileSpawner : MonoBehaviour
     public GameObject seedInputField;
     public GameObject seedInputFieldText;
     public GameObject currentSeedText;
+    public GameObject heightField;
+    public GameObject widthField;
     public Sprite[] tileLibrary;
     public Sprite[] altTileLibrary;
 
     public bool useAltTileLibrary;
+
+    public Sprite[] TileLibrary => useAltTileLibrary ? altTileLibrary : tileLibrary;
 
     public void SetUseAltTileLibrary(bool b)
     {
@@ -18,11 +22,9 @@ public class TileSpawner : MonoBehaviour
 
         Debug.Assert(tileLibrary != null && tileLibrary.Length > 0);
         Debug.Assert(altTileLibrary != null && altTileLibrary.Length > 0);
-
-        defaultSprite = useAltTileLibrary ? altTileLibrary[tileLibrary.Length - 1] : tileLibrary[altTileLibrary.Length - 1];
     }
 
-    public Sprite defaultSprite;
+    public Sprite DefaultSprite => TileLibrary[TileLibrary.Length -1];
 
     public int width = 2;
     public int height = 2;
@@ -44,6 +46,7 @@ public class TileSpawner : MonoBehaviour
     {
         None,
         Average,
+        AverageWithRandom,
         Random,
         Barricelli,
     }
@@ -56,7 +59,7 @@ public class TileSpawner : MonoBehaviour
     }
 
     Texture2D[,] textures;
-    int[,] genes;
+    Cell[,] cells;
     GameObject[,] chunks;
 
     int[] randomShiftIndexArray;
@@ -92,29 +95,19 @@ public class TileSpawner : MonoBehaviour
 
     int GetRandomGene()
     {
-        return Random.Range(-(useAltTileLibrary ? altTileLibrary : tileLibrary).Length / 2, (useAltTileLibrary ? altTileLibrary : tileLibrary).Length / 2 - (1 - (useAltTileLibrary ? altTileLibrary : tileLibrary).Length % 2));
-        //return Random.Range(-tileLibrary.Length / 2, tileLibrary.Length / 2 - 1);
+        return Random.Range(GetMinGene(), GetMaxGene());
     }
 
-    int MapGeneToIndex(int gene)
+    int GetMinGene()
     {
-        return gene < 0 ? gene + (useAltTileLibrary ? altTileLibrary : tileLibrary).Length / 2 : gene + (useAltTileLibrary ? altTileLibrary : tileLibrary).Length / 2 - (1 - (useAltTileLibrary ? altTileLibrary : tileLibrary).Length % 2);
-        //return gene < 0 ? gene + tileLibrary.Length / 2 : gene + tileLibrary.Length / 2 - 1;
+        int length = TileLibrary.Length;
+        return -length / 2 + (1 - length % 2);
     }
 
-    int ClampGene(int gene)
+    int GetMaxGene()
     {
-        if(gene < -(useAltTileLibrary ? altTileLibrary : tileLibrary).Length / 2)
-        {
-            return -(useAltTileLibrary ? altTileLibrary : tileLibrary).Length / 2;
-        }
-
-        if(gene > (useAltTileLibrary ? altTileLibrary : tileLibrary).Length / 2 - (1 - (useAltTileLibrary ? altTileLibrary : tileLibrary).Length % 2))
-        {
-            return (useAltTileLibrary ? altTileLibrary : tileLibrary).Length / 2 - (1 - (useAltTileLibrary ? altTileLibrary : tileLibrary).Length % 2);
-        }
-
-        return gene;
+        int length = TileLibrary.Length;
+        return length / 2;
     }
 
     public void Save()
@@ -165,11 +158,22 @@ public class TileSpawner : MonoBehaviour
 
     public void Run()
     {
-        Start();
+        Initialize();
     }
 
     // Start is called before the first frame update
     void Start()
+    {
+        var field = heightField.GetComponent<InputField>();
+        field.SetTextWithoutNotify(height.ToString());
+
+        field = widthField.GetComponent<InputField>();
+        field.SetTextWithoutNotify(width.ToString());
+
+        Initialize();
+    }
+
+    void Initialize()
     {
         if(!tileMappingStateInitialized)
         {
@@ -187,18 +191,20 @@ public class TileSpawner : MonoBehaviour
             Random.InitState(seed);
         }
 
-        Debug.Assert(currentSeedText != null);
-        Text t = currentSeedText.GetComponent<Text>();
-        Debug.Assert(t != null);
+        {
+            Debug.Assert(currentSeedText != null);
+            Text t = currentSeedText.GetComponent<Text>();
+            Debug.Assert(t != null);
 
-        t.text = "Seed: " + seed;
+            t.text = "Seed: " + seed;
+        }
 
         foreach (Transform child in transform)
         {
             GameObject.Destroy(child.gameObject);
         }
 
-        Debug.Assert((useAltTileLibrary ? altTileLibrary : tileLibrary) != null);
+        Debug.Assert(TileLibrary != null);
 
         textureDimensionX = width * tileWidth / PNGSize;
         if ((width * tileWidth) % PNGSize > 0)
@@ -246,8 +252,8 @@ public class TileSpawner : MonoBehaviour
             randomShiftIndexArray[i] = i;
         }
 
-        tileMappingArray = new int[(useAltTileLibrary ? altTileLibrary : tileLibrary).Length];
-        for(int i= 0; i < (useAltTileLibrary ? altTileLibrary : tileLibrary).Length; ++i)
+        tileMappingArray = new int[TileLibrary.Length];
+        for(int i= 0; i < TileLibrary.Length; ++i)
         {
             tileMappingArray[i] = i;
         }
@@ -261,12 +267,9 @@ public class TileSpawner : MonoBehaviour
             Random.state = tempState;
         }
 
-        Initialize();
-    }
-
-    void Initialize()
-    {
-        genes = new int[width, height];
+        cells = new Cell[width, height];
+        Cell.Min = GetMinGene();
+        Cell.Max = GetMaxGene();
 
         currentGenerationIndex = 0;
         nextGenerationIndex = currentGenerationIndex + 1;
@@ -275,13 +278,15 @@ public class TileSpawner : MonoBehaviour
         {
             for (int x = 0; x < width; ++x)
             {
-                AssignGeneToTile(x, y, -100); //hack!
-
                 if (y == currentGenerationIndex)
                 {
                     int randomGene = GetRandomGene();
 
-                    AssignGeneToTile(x, y, randomGene);
+                    AssignGeneToTile(x, y, randomGene, Cell.CellStatus.Normal);
+                }
+                else
+                {
+                    AssignGeneToTile(x, y, 0, Cell.CellStatus.Empty);
                 }
             }
         }
@@ -292,61 +297,41 @@ public class TileSpawner : MonoBehaviour
         }
     }
 
-    void AssignGeneToTile(int x, int y, int gene)
+    void AssignGeneToTile(int x, int y, int gene, Cell.CellStatus status)
     {
         Debug.Assert(textures != null);
-        Debug.Assert(genes != null);
+        Debug.Assert(cells != null);
 
-        if(gene == 0)
+        cells[x, y].Gene = gene;
+        cells[x, y].Status = status;
+
+        int textureX = (x * tileWidth) / PNGSize;
+        int textureY = (y * tileHeight) / PNGSize;
+
+        int chunkX = (x * tileWidth) % PNGSize;
+        int chunkY = (y * tileHeight) % PNGSize;
+
+        Texture2D t;
+        Rect r;
+
+        if (status == Cell.CellStatus.Normal)
         {
-            return;
-        }
-
-        int index = MapGeneToIndex(gene);
-        if (index >= 0 && index < (useAltTileLibrary ? altTileLibrary : tileLibrary).Length)
-        {
-            int textureX = (x * tileWidth) / PNGSize;
-            int textureY = (y * tileHeight) / PNGSize;
-
-            int chunkX = (x * tileWidth) % PNGSize;
-            int chunkY = (y * tileHeight) % PNGSize;
-
-            Texture2D t = (useAltTileLibrary ? altTileLibrary : tileLibrary)[tileMappingArray[index]].texture;
-            Rect r = (useAltTileLibrary ? altTileLibrary : tileLibrary)[tileMappingArray[index]].textureRect;
-            textures[textureX, textureY].SetPixels(chunkX, chunkY, tileWidth, tileHeight, t.GetPixels((int)r.x, (int)r.y, (int)r.width, (int)r.height));
-
-            genes[x, y] = gene;
+            int index = cells[x, y].Index;
+            t = TileLibrary[tileMappingArray[index]].texture;
+            r = TileLibrary[tileMappingArray[index]].textureRect;
         }
         else
         {
-            //TODO: display an X or something
-            int textureX = (x * tileWidth) / PNGSize;
-            int textureY = (y * tileHeight) / PNGSize;
-
-            int chunkX = (x * tileWidth) % PNGSize;
-            int chunkY = (y * tileHeight) % PNGSize;
-
-            Texture2D t = defaultSprite.texture;
-            Rect r = defaultSprite.textureRect;
-            textures[textureX, textureY].SetPixels(chunkX, chunkY, tileWidth, tileHeight, t.GetPixels((int)r.x, (int)r.y, (int)r.width, (int)r.height));
-
-            //Color[] colors = new Color[tileHeight * tileWidth];
-            //for(int i = 0; i < tileHeight * tileWidth; ++i)
-            //{
-            //    colors[i] = Color.white;
-            //}
-
-            //textures[textureX, textureY].SetPixels(chunkX, chunkY, tileWidth, tileHeight, colors);
-
-
-            genes[x, y] = 0;
+            t = DefaultSprite.texture;
+            r = DefaultSprite.textureRect;
         }
+
+        textures[textureX, textureY].SetPixels(chunkX, chunkY, tileWidth, tileHeight, t.GetPixels((int)r.x, (int)r.y, (int)r.width, (int)r.height));
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         if (nextGenerationIndex > 0)
         {
             for(int i = 0; i < 512; ++i)
@@ -386,64 +371,75 @@ public class TileSpawner : MonoBehaviour
     private void Shift(int i)
     {
         //n := j := this generation[i];
-        int j = genes[i, currentGenerationIndex];
+        Cell start = cells[i, currentGenerationIndex];
+        Cell current = start;
 
-        int n = j;
-
-        if(n == 0 || n == (useAltTileLibrary ? altTileLibrary : tileLibrary).Length)
+        if(start.Status != Cell.CellStatus.Normal)
         {
             return;
         }
 
-        int reproductionCounter = 0;
-
         //reproduce: if j = 0 then goto next i;
+        int reproductionCounter = 0;
         do
         {
             //k:= modulo 512 of(i) plus: (j);
-            int k = i + j;
+            int k = i + current.Gene;
             while (k < 0 || k >= width)
             {
                 k = (k + width) % width;
             }
 
-            //if next generation[k] > 0 then
-            int bi1 = genes[k, nextGenerationIndex];
+            //if next generation[k] != 0 then we have a collision
+            Cell destination = cells[k, nextGenerationIndex];
 
-            if (bi1 != 0)
+            if (destination.Status != Cell.CellStatus.Empty)
             {
                 switch (mutationType)
                 {
                     case MutationType.None:
-                        AssignGeneToTile(k, nextGenerationIndex, bi1 == n ? n : (useAltTileLibrary ? altTileLibrary : tileLibrary).Length);
+                        if(destination.Gene != start.Gene)
+                        {
+                            AssignGeneToTile(k, nextGenerationIndex, 0, Cell.CellStatus.Collision);
+                        }
                         break;
                     case MutationType.Average:
-                        if (genes[k, currentGenerationIndex] != 0)
+                        if (cells[k, currentGenerationIndex].Status != Cell.CellStatus.Empty)
                         {
-                            int m = (n + bi1) / 2;
+                            int m = (start.Gene + destination.Gene) / 2;
 
-                            AssignGeneToTile(k, nextGenerationIndex, m);
+                            AssignGeneToTile(k, nextGenerationIndex, m, Cell.CellStatus.Normal);
+                        }
+                        break;
+                    case MutationType.AverageWithRandom:
+                        if (cells[k, currentGenerationIndex].Status != Cell.CellStatus.Empty)
+                        {
+                            int a = (start.Gene + destination.Gene) / 2;
+                            int r = GetRandomGene();
+                            int m = a * 4 + r;
+                            m /= 5;
+
+                            AssignGeneToTile(k, nextGenerationIndex, m, Cell.CellStatus.Normal);
                         }
                         break;
                     case MutationType.Random:
-                        if (genes[k, currentGenerationIndex] != 0)
+                        if (cells[k, currentGenerationIndex].Status != Cell.CellStatus.Empty)
                         {
                             int m = GetRandomGene();
 
-                            AssignGeneToTile(k, nextGenerationIndex, m);
+                            AssignGeneToTile(k, nextGenerationIndex, m, Cell.CellStatus.Normal);
                         }
                         break;
                     case MutationType.Barricelli:
-                        if (genes[k, currentGenerationIndex] == 0 || genes[k, currentGenerationIndex] == (useAltTileLibrary ? altTileLibrary : tileLibrary).Length)
+                        if (cells[k, currentGenerationIndex].Status == Cell.CellStatus.Normal)
                         {
-                            int d = FindDistance(k);
-                            ClampGene(d);
-
-                            AssignGeneToTile(k, nextGenerationIndex, d);
+                            AssignGeneToTile(k, nextGenerationIndex, 0, Cell.CellStatus.Collision);
                         }
                         else
                         {
-                            AssignGeneToTile(k, nextGenerationIndex, (useAltTileLibrary ? altTileLibrary : tileLibrary).Length);
+                            int d = FindDistance(k);
+
+                            AssignGeneToTile(k, nextGenerationIndex, d, Cell.CellStatus.Normal);
                         }
                         break;
                 }
@@ -451,15 +447,17 @@ public class TileSpawner : MonoBehaviour
             }
             else
             {
+                // no collision
+
                 //next generation[k] := n;
-                AssignGeneToTile(k, nextGenerationIndex, n);
+                AssignGeneToTile(k, nextGenerationIndex, start.Gene, Cell.CellStatus.Normal);
             }
 
             //j:= this generation[k];
-            j = genes[k, currentGenerationIndex];
+            current = cells[k, currentGenerationIndex];
 
             ++reproductionCounter;
-        } while (j != 0 && j != (useAltTileLibrary ? altTileLibrary : tileLibrary).Length && j != n && reproductionCounter < maxReproductions);
+        } while (current.Status == Cell.CellStatus.Normal && current.Gene != start.Gene && reproductionCounter < maxReproductions);
     }
 
     int FindDistance(int k)
@@ -467,7 +465,7 @@ public class TileSpawner : MonoBehaviour
         int rCount = 0;
         int r = k;
 
-        while(genes[r, currentGenerationIndex] == 0 || genes[r, currentGenerationIndex] == (useAltTileLibrary ? altTileLibrary : tileLibrary).Length)
+        while(cells[r, currentGenerationIndex].Status != Cell.CellStatus.Normal)
         {
             rCount++;
             r++;
@@ -477,15 +475,15 @@ public class TileSpawner : MonoBehaviour
         int lCount = 0;
         int l = k;
 
-        while (genes[l, currentGenerationIndex] == 0 || genes[l, currentGenerationIndex] == (useAltTileLibrary ? altTileLibrary : tileLibrary).Length)
+        while (cells[l, currentGenerationIndex].Status == Cell.CellStatus.Normal)
         {
             lCount++;
             l--;
             l = (l + width) % width;
         }
 
-        if( (genes[r, currentGenerationIndex] > 0 && genes[l, currentGenerationIndex] > 0) ||
-            (genes[r, currentGenerationIndex] < 0 && genes[l, currentGenerationIndex] < 0) )
+        if( (cells[r, currentGenerationIndex].Gene > 0 && cells[l, currentGenerationIndex].Gene > 0) ||
+            (cells[r, currentGenerationIndex].Gene < 0 && cells[l, currentGenerationIndex].Gene < 0) )
         {
             return rCount + lCount;
         }
