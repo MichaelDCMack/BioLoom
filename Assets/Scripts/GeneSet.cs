@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 
-public class TileSet : MonoBehaviour
+public class GeneSet : MonoBehaviour
 {
-
     #region public members
     public Sprite[] sprites;
 
@@ -12,6 +11,8 @@ public class TileSet : MonoBehaviour
     public int height;
     public int width;
 
+    public bool useStartGene;
+    public int startGene;
     #endregion
 
     #region private members
@@ -21,10 +22,23 @@ public class TileSet : MonoBehaviour
     #region properties
     public int Length => sprites.Length;
 
-    public Sprite this[int index] => sprites[tileSpriteMapping[index]];
-
     public Sprite Empty => emptySprite;
     public Sprite Collision => collisionSprite;
+
+    public int MinGene
+    {
+        get
+        {
+            if (useStartGene)
+            {
+                return startGene;
+            }
+
+            return -Length / 2;
+        }
+    }
+    
+    public int MaxGene => MinGene + Length - 1;
     #endregion
 
     public void Start()
@@ -44,5 +58,15 @@ public class TileSet : MonoBehaviour
     public void ShuffleMapping()
     {
         Extensions.Shuffle(tileSpriteMapping);
+    }
+    
+    public int GetRandomGene()
+    {
+        return Random.Range(MinGene, MaxGene);
+    }
+
+    public Sprite GetSpriteFromGene(int gene)
+    {
+        return sprites[tileSpriteMapping[gene - MinGene]];
     }
 }

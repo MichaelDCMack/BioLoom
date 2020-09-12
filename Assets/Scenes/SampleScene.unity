@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 70668772}
   - component: {fileID: 70668771}
   m_Layer: 0
-  m_Name: TileSetColorNumbers
+  m_Name: GeneSetColorNumbers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,6 +195,8 @@ MonoBehaviour:
     type: 3}
   height: 8
   width: 8
+  useStartGene: 1
+  startGene: -18
 --- !u!4 &70668772
 Transform:
   m_ObjectHideFlags: 0
@@ -1108,7 +1110,7 @@ GameObject:
   - component: {fileID: 512168918}
   - component: {fileID: 512168917}
   m_Layer: 0
-  m_Name: TileSet
+  m_Name: GeneSet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1149,6 +1151,8 @@ MonoBehaviour:
     type: 3}
   height: 32
   width: 8
+  useStartGene: 0
+  startGene: 0
 --- !u!4 &512168918
 Transform:
   m_ObjectHideFlags: 0
@@ -1869,7 +1873,7 @@ MonoBehaviour:
   currentSeedText: {fileID: 319471799}
   heightField: {fileID: 1948318587}
   widthField: {fileID: 2141460498}
-  tileSet: {fileID: 70668771}
+  geneSet: {fileID: 70668771}
   width: 256
   height: 256
   currentGenerationIndex: 0

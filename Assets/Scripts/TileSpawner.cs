@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class TileSpawner : MonoBehaviour
@@ -9,7 +10,7 @@ public class TileSpawner : MonoBehaviour
     public GameObject heightField;
     public GameObject widthField;
 
-    public TileSet tileSet;
+    public GeneSet geneSet;
 
     public int width = 2;
     public int height = 2;
@@ -81,23 +82,6 @@ public class TileSpawner : MonoBehaviour
         {
             seed = result;
         }
-    }
-
-    int GetRandomGene()
-    {
-        return Random.Range(GetMinGene(), GetMaxGene());
-    }
-
-    int GetMinGene()
-    {
-        int length = tileSet.Length;
-        return -length / 2;
-    }
-
-    int GetMaxGene()
-    {
-        int length = tileSet.Length;
-        return length / 2 - (1 - length % 2);
     }
 
     public void Save()
@@ -194,16 +178,16 @@ public class TileSpawner : MonoBehaviour
             GameObject.Destroy(child.gameObject);
         }
 
-        Debug.Assert(tileSet != null);
+        Debug.Assert(geneSet != null);
 
-        textureDimensionX = width * tileSet.width / PNGSize;
-        if ((width * tileSet.width) % PNGSize > 0)
+        textureDimensionX = width * geneSet.width / PNGSize;
+        if ((width * geneSet.width) % PNGSize > 0)
         {
             ++textureDimensionX;
         }
 
-        textureDimensionY = height * tileSet.height / PNGSize;
-        if((height * tileSet.height) % PNGSize > 0)
+        textureDimensionY = height * geneSet.height / PNGSize;
+        if((height * geneSet.height) % PNGSize > 0)
         {
             ++textureDimensionY;
         }
@@ -215,7 +199,7 @@ public class TileSpawner : MonoBehaviour
         {
             for (int j = 0; j < textureDimensionY; ++j)
             {
-                textures[i, j] = new Texture2D(Mathf.Min(width * tileSet.width, PNGSize), Mathf.Min(height * tileSet.height, PNGSize));
+                textures[i, j] = new Texture2D(Mathf.Min(width * geneSet.width, PNGSize), Mathf.Min(height * geneSet.height, PNGSize));
                 Debug.Assert(textures[i, j] != null);
 
                 textures[i, j].filterMode = FilterMode.Point;
@@ -239,13 +223,11 @@ public class TileSpawner : MonoBehaviour
         if (shuffleTileMapping)
         {
             Random.State tempState = Random.state;
-            tileSet.ShuffleMapping();
+            geneSet.ShuffleMapping();
             Random.state = tempState;
         }
 
         cells = new Cell[width, height];
-        Cell.Min = GetMinGene();
-        Cell.Max = GetMaxGene();
 
         currentGenerationIndex = 0;
         nextGenerationIndex = currentGenerationIndex + 1;
@@ -256,7 +238,7 @@ public class TileSpawner : MonoBehaviour
             {
                 if (y == currentGenerationIndex)
                 {
-                    int randomGene = GetRandomGene();
+                    int randomGene = geneSet.GetRandomGene();
 
                     AssignGeneToTile(x, y, randomGene, Cell.CellStatus.Normal);
                 }
@@ -278,14 +260,14 @@ public class TileSpawner : MonoBehaviour
         Debug.Assert(textures != null);
         Debug.Assert(cells != null);
 
-        cells[x, y].Gene = gene;
+        cells[x, y].Gene = Extensions.Clamp(gene, geneSet.MinGene, geneSet.MaxGene);
         cells[x, y].Status = status;
 
-        int textureX = (x * tileSet.width) / PNGSize;
-        int textureY = (y * tileSet.height) / PNGSize;
+        int textureX = (x * geneSet.width) / PNGSize;
+        int textureY = (y * geneSet.height) / PNGSize;
 
-        int chunkX = (x * tileSet.width) % PNGSize;
-        int chunkY = (y * tileSet.height) % PNGSize;
+        int chunkX = (x * geneSet.width) % PNGSize;
+        int chunkY = (y * geneSet.height) % PNGSize;
 
         Texture2D t;
         Rect r;
@@ -293,22 +275,21 @@ public class TileSpawner : MonoBehaviour
         switch (status)
         {
             case Cell.CellStatus.Normal:
-                int index = cells[x, y].Index;
-                t = tileSet[index].texture;
-                r = tileSet[index].textureRect;
+                t = geneSet.GetSpriteFromGene(cells[x, y].Gene).texture;
+                r = geneSet.GetSpriteFromGene(cells[x, y].Gene).textureRect;
                 break;
             case Cell.CellStatus.Collision:
-                t = tileSet.Collision.texture;
-                r = tileSet.Collision.textureRect;
+                t = geneSet.Collision.texture;
+                r = geneSet.Collision.textureRect;
                 break;
             default:
-                t = tileSet.Empty.texture;
-                r = tileSet.Empty.textureRect;
+                t = geneSet.Empty.texture;
+                r = geneSet.Empty.textureRect;
                 break;
         }
 
         textures[textureX, textureY].SetPixels(chunkX, chunkY,
-            tileSet.width, tileSet.height,
+            geneSet.width, geneSet.height,
             t.GetPixels((int) r.x, (int) r.y, (int) r.width, (int) r.height));
     }
 
@@ -323,12 +304,12 @@ public class TileSpawner : MonoBehaviour
             currentPosition.z = -_camera.transform.position.z;
             Vector3 worldPosition = _camera.ScreenToWorldPoint(currentPosition);
 
-            int x = (int) worldPosition.x / tileSet.width;
-            int y = (int) worldPosition.y / tileSet.height;
+            int x = (int) worldPosition.x / geneSet.width;
+            int y = (int) worldPosition.y / geneSet.height;
 
             if (x >= 0 && x < width && y >= 0 && y < height)
             {
-                AssignGeneToTile(x, y, geneBrushIndex + GetMinGene(), Cell.CellStatus.Normal);
+                AssignGeneToTile(x, y, geneBrushIndex + geneSet.MinGene, Cell.CellStatus.Normal);
 
                 for (int i = 0; i < width; ++i)
                 {
@@ -455,7 +436,7 @@ public class TileSpawner : MonoBehaviour
                         if (cells[k, currentGenerationIndex].Status != Cell.CellStatus.Empty)
                         {
                             int a = (start.Gene + destination.Gene) / 2;
-                            int r = GetRandomGene();
+                            int r = geneSet.GetRandomGene();
                             int m = a * 4 + r;
                             m /= 5;
 
@@ -465,7 +446,7 @@ public class TileSpawner : MonoBehaviour
                     case MutationType.Random:
                         if (cells[k, currentGenerationIndex].Status != Cell.CellStatus.Empty)
                         {
-                            int m = GetRandomGene();
+                            int m = geneSet.GetRandomGene();
 
                             AssignGeneToTile(k, nextGenerationIndex, m, Cell.CellStatus.Normal);
                         }
