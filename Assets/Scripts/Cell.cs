@@ -17,24 +17,11 @@
     private int gene;
     public int Gene
     {
-        get
-        {
-            return gene;
-        }
-
-        set
-        {
-            gene = Clamp(value, Min, Max);
-        }
+        get => gene;
+        set => gene = Clamp(value, Min, Max);
     }
 
-    public int Index
-    {
-        get
-        {
-            return gene - Min;
-        }
-    }
+    public int Index => gene - Min;
 
     #endregion
 

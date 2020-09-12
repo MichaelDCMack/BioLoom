@@ -24,6 +24,8 @@ public class TileSpawner : MonoBehaviour
     public bool shuffleTileMapping = false;
     public bool useSeed = false;
     public int seed = 0;
+
+    public bool shuffleIndexArray;
     
     public enum MutationType
     {
@@ -51,13 +53,10 @@ public class TileSpawner : MonoBehaviour
     Cell[,] cells;
     GameObject[,] chunks;
 
-    int[] randomShiftIndexArray;
-
     int textureDimensionX;
     int textureDimensionY;
 
-    Random.State tileMappingState;
-    bool tileMappingStateInitialized = false;
+    private Random.State[] rowStates;
 
     private Camera _camera;
 
@@ -92,25 +91,25 @@ public class TileSpawner : MonoBehaviour
     int GetMinGene()
     {
         int length = tileSet.Length;
-        return -length / 2 + (1 - length % 2);
+        return -length / 2;
     }
 
     int GetMaxGene()
     {
         int length = tileSet.Length;
-        return length / 2;
+        return length / 2 - (1 - length % 2);
     }
 
     public void Save()
     {
         string path = "BioLoomImage-" +
-            System.DateTime.Now.Year + "-" +
-            System.DateTime.Now.Month + "-" +
-            System.DateTime.Now.Day + "-" +
-            System.DateTime.Now.Hour + "-" +
-            System.DateTime.Now.Minute + "-" +
-            System.DateTime.Now.Second +
-            "[" + seed + "]";
+                      System.DateTime.Now.Year + "-" +
+                      System.DateTime.Now.Month + "-" +
+                      System.DateTime.Now.Day + "-" +
+                      System.DateTime.Now.Hour + "-" +
+                      System.DateTime.Now.Minute + "-" +
+                      System.DateTime.Now.Second +
+                      "[" + seed + "]";
 
         for (int i = 0; i < textureDimensionX; ++i)
         {
@@ -118,8 +117,8 @@ public class TileSpawner : MonoBehaviour
             {
                 byte[] bytes = textures[i, j].EncodeToPNG();
                 string fullPath = path + 
-                    "[" + i + "," + (textureDimensionY - j - 1) + "]" +
-                    ".png";
+                                  "[" + i + "," + (textureDimensionY - j - 1) + "]" +
+                                  ".png";
                 System.IO.File.WriteAllBytes(fullPath, bytes);
                 Debug.Log(bytes.Length / 1024 + "Kb was saved as: " + fullPath);
             }
@@ -170,11 +169,7 @@ public class TileSpawner : MonoBehaviour
 
     void Initialize()
     {
-        if(!tileMappingStateInitialized)
-        {
-            tileMappingState = Random.state;
-            tileMappingStateInitialized = true;
-        }
+        rowStates = new Random.State[height];
 
         if (useSeed)
         {
@@ -241,18 +236,10 @@ public class TileSpawner : MonoBehaviour
             }
         }
 
-        randomShiftIndexArray = new int[width];
-        for (int i = 0; i < width; ++i)
-        {
-            randomShiftIndexArray[i] = i;
-        }
-
         if (shuffleTileMapping)
         {
             Random.State tempState = Random.state;
-            Random.state = tileMappingState;
             tileSet.ShuffleMapping();
-            tileMappingState = Random.state;
             Random.state = tempState;
         }
 
@@ -330,36 +317,45 @@ public class TileSpawner : MonoBehaviour
     {
         bool applyTextures = false;
 
-        if(Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             Vector3 currentPosition = Input.mousePosition;
             currentPosition.z = -_camera.transform.position.z;
             Vector3 worldPosition = _camera.ScreenToWorldPoint(currentPosition);
 
-            int x = (int)worldPosition.x / tileSet.width;
-            int y = (int)worldPosition.y / tileSet.height;
+            int x = (int) worldPosition.x / tileSet.width;
+            int y = (int) worldPosition.y / tileSet.height;
 
-            if(x >= 0 && x < width && y >= 0 && y < height)
+            if (x >= 0 && x < width && y >= 0 && y < height)
             {
                 AssignGeneToTile(x, y, geneBrushIndex + GetMinGene(), Cell.CellStatus.Normal);
-                applyTextures = true;
-            }
 
-            if(currentGenerationIndex > y)
-            {
-                currentGenerationIndex = y;
-                nextGenerationIndex = y + 1;
+                for (int i = 0; i < width; ++i)
+                {
+                    for (int j = y + 1; j < height; ++j)
+                    {
+                        AssignGeneToTile(i, j, 0, Cell.CellStatus.Empty);
+                    }
+                }
+
+                applyTextures = true;
+
+                if (currentGenerationIndex > y)
+                {
+                    currentGenerationIndex = y;
+                    nextGenerationIndex = y + 1;
+
+                    Random.state = rowStates[currentGenerationIndex];
+                }
             }
         }
 
-        if (nextGenerationIndex < height)
+        int allowedOperations = FPSWatcher.AllowedOperations;
+        for (int operations = 0; operations < allowedOperations; ++operations)
         {
-            int allowedOperations = FPSWatcher.AllowedOperations;
-            int operations = 0;
-            for(int i = 0; operations < allowedOperations; ++i)
+            if (RunBarricelli() == 0)
             {
-                operations += RunBarricelli();
-                ++operations;
+                break;
             }
 
             applyTextures = true;
@@ -391,10 +387,22 @@ public class TileSpawner : MonoBehaviour
 
     int SimulateRow()
     {
-        Extensions.Shuffle(randomShiftIndexArray);
+        rowStates[currentGenerationIndex] = Random.state;
+        
+        int[] indexArray = new int[width];
+        for (int i = 0; i < width; ++i)
+        {
+            indexArray[i] = i;
+        }
+
+        if (shuffleIndexArray)
+        {
+            Extensions.Shuffle(indexArray);
+        }
+
         for(int i = 0; i < width; ++i)
         {
-            Shift(randomShiftIndexArray[i]);
+            Shift(indexArray[i]);
         }
 
         return 1;
