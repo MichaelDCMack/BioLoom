@@ -5,33 +5,14 @@ public class TileSpawner : MonoBehaviour
 {
     public GameObject chunkPrefab;
     public GameObject seedInputField;
-    public GameObject seedInputFieldText;
     public GameObject currentSeedText;
     public GameObject heightField;
     public GameObject widthField;
-    public GameObject tilePicker;
-    public Sprite[] tileLibrary;
-    public Sprite[] altTileLibrary;
 
-    public bool useAltTileLibrary;
-
-    public Sprite[] TileLibrary => useAltTileLibrary ? altTileLibrary : tileLibrary;
-
-    public void SetUseAltTileLibrary(bool b)
-    {
-        useAltTileLibrary = b;
-
-        Debug.Assert(tileLibrary != null && tileLibrary.Length > 0);
-        Debug.Assert(altTileLibrary != null && altTileLibrary.Length > 0);
-    }
-
-    public Sprite DefaultSprite => TileLibrary[TileLibrary.Length -1];
+    public TileSet tileSet;
 
     public int width = 2;
     public int height = 2;
-
-    public int tileWidth = 8;
-    public int tileHeight = 8;
 
     public int currentGenerationIndex = 0;
     public int nextGenerationIndex = 1;
@@ -43,6 +24,7 @@ public class TileSpawner : MonoBehaviour
     public bool shuffleTileMapping = false;
     public bool useSeed = false;
     public int seed = 0;
+    
     public enum MutationType
     {
         None,
@@ -70,13 +52,13 @@ public class TileSpawner : MonoBehaviour
     GameObject[,] chunks;
 
     int[] randomShiftIndexArray;
-    int[] tileMappingArray;
 
     int textureDimensionX;
     int textureDimensionY;
 
     Random.State tileMappingState;
     bool tileMappingStateInitialized = false;
+    Camera camera;
 
     FPSWatcher FPSWatcher { get; set; }
 
@@ -108,13 +90,13 @@ public class TileSpawner : MonoBehaviour
 
     int GetMinGene()
     {
-        int length = TileLibrary.Length;
+        int length = tileSet.Length;
         return -length / 2 + (1 - length % 2);
     }
 
     int GetMaxGene()
     {
-        int length = TileLibrary.Length;
+        int length = tileSet.Length;
         return length / 2;
     }
 
@@ -169,23 +151,10 @@ public class TileSpawner : MonoBehaviour
         Initialize();
     }
 
-    void InitializeTilePickerDropdown()
-    {
-        Dropdown dropdown = tilePicker.GetComponent<Dropdown>();
-
-        dropdown.ClearOptions();
-
-        foreach (Sprite sprite in TileLibrary)
-        {
-            dropdown.options.Add(new Dropdown.OptionData(sprite));
-        }
-
-        dropdown.RefreshShownValue();
-    }
-
     // Start is called before the first frame update
     void Start()
     {
+        camera = Camera.main;
         var field = heightField.GetComponent<InputField>();
         field.SetTextWithoutNotify(height.ToString());
 
@@ -199,8 +168,6 @@ public class TileSpawner : MonoBehaviour
 
     void Initialize()
     {
-        InitializeTilePickerDropdown();
-
         if(!tileMappingStateInitialized)
         {
             tileMappingState = Random.state;
@@ -230,16 +197,16 @@ public class TileSpawner : MonoBehaviour
             GameObject.Destroy(child.gameObject);
         }
 
-        Debug.Assert(TileLibrary != null);
+        Debug.Assert(tileSet != null);
 
-        textureDimensionX = width * tileWidth / PNGSize;
-        if ((width * tileWidth) % PNGSize > 0)
+        textureDimensionX = width * tileSet.width / PNGSize;
+        if ((width * tileSet.width) % PNGSize > 0)
         {
             ++textureDimensionX;
         }
 
-        textureDimensionY = height * tileHeight / PNGSize;
-        if((height * tileHeight) % PNGSize > 0)
+        textureDimensionY = height * tileSet.height / PNGSize;
+        if((height * tileSet.height) % PNGSize > 0)
         {
             ++textureDimensionY;
         }
@@ -251,7 +218,7 @@ public class TileSpawner : MonoBehaviour
         {
             for (int j = 0; j < textureDimensionY; ++j)
             {
-                textures[i, j] = new Texture2D(Mathf.Min(width * tileWidth, PNGSize), Mathf.Min(height * tileHeight, PNGSize));
+                textures[i, j] = new Texture2D(Mathf.Min(width * tileSet.width, PNGSize), Mathf.Min(height * tileSet.height, PNGSize));
                 Debug.Assert(textures[i, j] != null);
 
                 textures[i, j].filterMode = FilterMode.Point;
@@ -278,17 +245,11 @@ public class TileSpawner : MonoBehaviour
             randomShiftIndexArray[i] = i;
         }
 
-        tileMappingArray = new int[TileLibrary.Length];
-        for(int i= 0; i < TileLibrary.Length; ++i)
-        {
-            tileMappingArray[i] = i;
-        }
-
         if (shuffleTileMapping)
         {
             Random.State tempState = Random.state;
             Random.state = tileMappingState;
-            Shuffle(tileMappingArray);
+            tileSet.ShuffleMapping();
             tileMappingState = Random.state;
             Random.state = tempState;
         }
@@ -331,30 +292,35 @@ public class TileSpawner : MonoBehaviour
         cells[x, y].Gene = gene;
         cells[x, y].Status = status;
 
-        int textureX = (x * tileWidth) / PNGSize;
-        int textureY = (y * tileHeight) / PNGSize;
+        int textureX = (x * tileSet.width) / PNGSize;
+        int textureY = (y * tileSet.height) / PNGSize;
 
-        int chunkX = (x * tileWidth) % PNGSize;
-        int chunkY = (y * tileHeight) % PNGSize;
+        int chunkX = (x * tileSet.width) % PNGSize;
+        int chunkY = (y * tileSet.height) % PNGSize;
 
         Texture2D t;
         Rect r;
 
-        if (status == Cell.CellStatus.Normal)
+        switch (status)
         {
-            int index = cells[x, y].Index;
-            t = TileLibrary[tileMappingArray[index]].texture;
-            r = TileLibrary[tileMappingArray[index]].textureRect;
-        }
-        else
-        {
-            t = DefaultSprite.texture;
-            r = DefaultSprite.textureRect;
+            case Cell.CellStatus.Normal:
+                int index = cells[x, y].Index;
+                t = tileSet[index].texture;
+                r = tileSet[index].textureRect;
+                break;
+            case Cell.CellStatus.Collision:
+                t = tileSet.Collision.texture;
+                r = tileSet.Collision.textureRect;
+                break;
+            default:
+                t = tileSet.Empty.texture;
+                r = tileSet.Empty.textureRect;
+                break;
         }
 
         textures[textureX, textureY].SetPixels(chunkX, chunkY,
-            tileWidth, tileHeight,
-            t.GetPixels((int)r.x, (int)r.y, (int)r.width, (int)r.height));
+            tileSet.width, tileSet.height,
+            t.GetPixels((int) r.x, (int) r.y, (int) r.width, (int) r.height));
     }
 
     // Update is called once per frame
@@ -365,11 +331,11 @@ public class TileSpawner : MonoBehaviour
         if(Input.GetKey(KeyCode.Space))
         {
             Vector3 currentPosition = Input.mousePosition;
-            currentPosition.z = -Camera.main.transform.position.z;
-            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(currentPosition);
+            currentPosition.z = -camera.transform.position.z;
+            Vector3 worldPosition = camera.ScreenToWorldPoint(currentPosition);
 
-            int x = (int)worldPosition.x / tileWidth;
-            int y = (int)worldPosition.y / tileHeight;
+            int x = (int)worldPosition.x / tileSet.width;
+            int y = (int)worldPosition.y / tileSet.height;
 
             if(x >= 0 && x < width && y >= 0 && y < height)
             {
@@ -384,7 +350,7 @@ public class TileSpawner : MonoBehaviour
             }
         }
 
-        //if (nextGenerationIndex > 0)
+        if (nextGenerationIndex < height)
         {
             int allowedOperations = FPSWatcher.AllowedOperations;
             int operations = 0;
@@ -423,7 +389,7 @@ public class TileSpawner : MonoBehaviour
 
     int SimulateRow()
     {
-        Shuffle(randomShiftIndexArray);
+        Extensions.Shuffle(randomShiftIndexArray);
         for(int i = 0; i < width; ++i)
         {
             Shift(randomShiftIndexArray[i]);
@@ -554,18 +520,6 @@ public class TileSpawner : MonoBehaviour
         else
         {
             return -(rCount + lCount);
-        }
-    }
-
-    public static void Shuffle<T>(T[] array)
-    {
-        int n = array.Length;
-        while (n > 1)
-        {
-            int k = Random.Range(0, n--);
-            T temp = array[n];
-            array[n] = array[k];
-            array[k] = temp;
         }
     }
 }
