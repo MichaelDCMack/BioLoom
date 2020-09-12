@@ -58,7 +58,8 @@ public class TileSpawner : MonoBehaviour
 
     Random.State tileMappingState;
     bool tileMappingStateInitialized = false;
-    Camera camera;
+
+    private Camera _camera;
 
     FPSWatcher FPSWatcher { get; set; }
 
@@ -154,7 +155,8 @@ public class TileSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        camera = Camera.main;
+        _camera = Camera.main;
+        
         var field = heightField.GetComponent<InputField>();
         field.SetTextWithoutNotify(height.ToString());
 
@@ -331,8 +333,8 @@ public class TileSpawner : MonoBehaviour
         if(Input.GetKey(KeyCode.Space))
         {
             Vector3 currentPosition = Input.mousePosition;
-            currentPosition.z = -camera.transform.position.z;
-            Vector3 worldPosition = camera.ScreenToWorldPoint(currentPosition);
+            currentPosition.z = -_camera.transform.position.z;
+            Vector3 worldPosition = _camera.ScreenToWorldPoint(currentPosition);
 
             int x = (int)worldPosition.x / tileSet.width;
             int y = (int)worldPosition.y / tileSet.height;
