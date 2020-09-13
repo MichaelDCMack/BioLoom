@@ -9,6 +9,7 @@ public class TileSpawner : MonoBehaviour
     public GameObject heightField;
     public GameObject widthField;
     public GameObject geneSetDropdown;
+    public GameObject brushPreview;
 
     public GeneSet[] geneSets;
 
@@ -25,6 +26,7 @@ public class TileSpawner : MonoBehaviour
     public bool shuffleTileMapping = false;
     public bool useSeed = false;
     public int seed = 0;
+    public bool populate = true;
 
     public int geneSetIndex = 0;
 
@@ -53,9 +55,12 @@ public class TileSpawner : MonoBehaviour
     }
 
     int geneBrushIndex;
-    public void SetGeneBrushIndex(int index)
+
+    public void IncrementGeneBrushIndex(int value)
     {
-        geneBrushIndex = index;
+        geneBrushIndex += value;
+        geneBrushIndex = Extensions.Mod(geneBrushIndex, GeneSet.Length);
+        UpdateGeneBrushPreview();
     }
 
     Texture2D[,] textures;
@@ -176,6 +181,9 @@ public class TileSpawner : MonoBehaviour
         GeneSetIndex = geneSetIndex;
         rowStates = new Random.State[height];
 
+        geneBrushIndex = 0;
+        UpdateGeneBrushPreview();
+
         if (useSeed)
         {
             Random.InitState(seed);
@@ -264,7 +272,7 @@ public class TileSpawner : MonoBehaviour
         {
             for (int x = 0; x < width; ++x)
             {
-                if (y == currentGenerationIndex)
+                if (populate && y == currentGenerationIndex)
                 {
                     int randomGene = GeneSet.GetRandomGene();
 
@@ -281,6 +289,13 @@ public class TileSpawner : MonoBehaviour
         {
             t.Apply();
         }
+    }
+
+    private void UpdateGeneBrushPreview()
+    {
+        var preview = brushPreview.GetComponent<Image>();
+        preview.sprite = GeneSet.sprites[geneBrushIndex];
+        preview.SetNativeSize();
     }
 
     void AssignGeneToTile(int x, int y, int gene, Cell.CellStatus status)
