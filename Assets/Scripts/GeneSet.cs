@@ -3,6 +3,8 @@
 public class GeneSet : MonoBehaviour
 {
     #region public members
+
+    public string SetName;
     public Sprite[] sprites;
 
     public Sprite emptySprite;

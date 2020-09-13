@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1634758785544740793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1634758785544740795}
+  - component: {fileID: 1634758785544740792}
+  m_Layer: 0
+  m_Name: GeneSetColorWeave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1634758785544740795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634758785544740793}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1634758785544740792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634758785544740793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ab3e1e3bdf349c9af572e6ff4ceb54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SetName: Weave Colors
+  sprites:
+  - {fileID: 3885393171412495387, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: 7803866263314904691, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: -5566692066478168620, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: -3154687815925141686, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: 8707845403953016928, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: -5512739020116335643, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: 1732707709429743116, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: 2041038525430691288, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: 6311442305085583121, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: 1298712200992154189, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: 8527670776781577407, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: 1133068339372006825, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: -6084948205383487944, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: -7832655097021600075, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: 1673902592103140375, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: -4328991395358305675, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  emptySprite: {fileID: 3885393171412495387, guid: c491e3666d82e446cbb2a1e559f0b792,
+    type: 3}
+  collisionSprite: {fileID: -4328991395358305675, guid: c491e3666d82e446cbb2a1e559f0b792,
+    type: 3}
+  height: 32
+  width: 8
+  useStartGene: 0
+  startGene: 0

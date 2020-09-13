@@ -8,8 +8,9 @@ public class TileSpawner : MonoBehaviour
     public GameObject currentSeedText;
     public GameObject heightField;
     public GameObject widthField;
+    public GameObject geneSetDropdown;
 
-    public GeneSet geneSet;
+    public GeneSet[] geneSets;
 
     public int width = 2;
     public int height = 2;
@@ -24,6 +25,8 @@ public class TileSpawner : MonoBehaviour
     public bool shuffleTileMapping = false;
     public bool useSeed = false;
     public int seed = 0;
+
+    public int geneSetIndex = 0;
 
     public bool shuffleIndexArray;
     
@@ -41,6 +44,12 @@ public class TileSpawner : MonoBehaviour
     {
         Debug.Assert((MutationType)t >= MutationType.None && (MutationType)t <= MutationType.Barricelli);
         mutationType = (MutationType)t;
+    }
+
+    public void SetGeneSetIndex(int i)
+    {
+        Debug.Assert(i >= 0 && i < geneSets.Length);
+        geneSetIndex = i;
     }
 
     int geneBrushIndex;
@@ -61,6 +70,10 @@ public class TileSpawner : MonoBehaviour
     private Camera _camera;
 
     FPSWatcher FPSWatcher { get; set; }
+
+    private GeneSet GeneSet => geneSets[GeneSetIndex];
+
+    private int GeneSetIndex { get; set; }
 
     public void SetNewWidth(string s)
     {
@@ -147,11 +160,20 @@ public class TileSpawner : MonoBehaviour
 
         FPSWatcher = GetComponent<FPSWatcher>();
 
+        var dropdown = geneSetDropdown.GetComponent<Dropdown>();
+        foreach (var geneSet in geneSets)
+        {
+            dropdown.options.Add(new Dropdown.OptionData(geneSet.SetName));
+        }
+
+        dropdown.value = 0;
+
         Initialize();
     }
 
     void Initialize()
     {
+        GeneSetIndex = geneSetIndex;
         rowStates = new Random.State[height];
 
         if (useSeed)
@@ -177,16 +199,16 @@ public class TileSpawner : MonoBehaviour
             GameObject.Destroy(child.gameObject);
         }
 
-        Debug.Assert(geneSet != null);
+        Debug.Assert(GeneSet != null);
 
-        textureDimensionX = width * geneSet.width / PNGSize;
-        if ((width * geneSet.width) % PNGSize > 0)
+        textureDimensionX = width * GeneSet.width / PNGSize;
+        if ((width * GeneSet.width) % PNGSize > 0)
         {
             ++textureDimensionX;
         }
 
-        textureDimensionY = height * geneSet.height / PNGSize;
-        if((height * geneSet.height) % PNGSize > 0)
+        textureDimensionY = height * GeneSet.height / PNGSize;
+        if((height * GeneSet.height) % PNGSize > 0)
         {
             ++textureDimensionY;
         }
@@ -199,8 +221,8 @@ public class TileSpawner : MonoBehaviour
             for (int j = 0; j < textureDimensionY; ++j)
             {
                 textures[i, j] = new Texture2D(
-                    Mathf.Min(width * geneSet.width, PNGSize), 
-                    Mathf.Min(height * geneSet.height, PNGSize));
+                    Mathf.Min(width * GeneSet.width, PNGSize), 
+                    Mathf.Min(height * GeneSet.height, PNGSize));
                 Debug.Assert(textures[i, j] != null);
 
                 textures[i, j].filterMode = FilterMode.Point;
@@ -225,10 +247,11 @@ public class TileSpawner : MonoBehaviour
             }
         }
 
+        GeneSet.ResetMapping();
         if (shuffleTileMapping)
         {
             Random.State tempState = Random.state;
-            geneSet.ShuffleMapping();
+            GeneSet.ShuffleMapping();
             Random.state = tempState;
         }
 
@@ -243,7 +266,7 @@ public class TileSpawner : MonoBehaviour
             {
                 if (y == currentGenerationIndex)
                 {
-                    int randomGene = geneSet.GetRandomGene();
+                    int randomGene = GeneSet.GetRandomGene();
 
                     AssignGeneToTile(x, y, randomGene, randomGene == 0 ? Cell.CellStatus.Empty : Cell.CellStatus.Normal);
                 }
@@ -265,14 +288,14 @@ public class TileSpawner : MonoBehaviour
         Debug.Assert(textures != null);
         Debug.Assert(cells != null);
 
-        cells[x, y].Gene = Extensions.Clamp(gene, geneSet.MinGene, geneSet.MaxGene);
+        cells[x, y].Gene = Extensions.Clamp(gene, GeneSet.MinGene, GeneSet.MaxGene);
         cells[x, y].Status = status;
 
-        int textureX = (x * geneSet.width) / PNGSize;
-        int textureY = (y * geneSet.height) / PNGSize;
+        int textureX = (x * GeneSet.width) / PNGSize;
+        int textureY = (y * GeneSet.height) / PNGSize;
 
-        int chunkX = (x * geneSet.width) % PNGSize;
-        int chunkY = (y * geneSet.height) % PNGSize;
+        int chunkX = (x * GeneSet.width) % PNGSize;
+        int chunkY = (y * GeneSet.height) % PNGSize;
 
         Texture2D t;
         Rect r;
@@ -281,26 +304,26 @@ public class TileSpawner : MonoBehaviour
         {
             case Cell.CellStatus.Normal:
             {
-                t = geneSet.GetSpriteFromGene(cells[x, y].Gene).texture;
-                r = geneSet.GetSpriteFromGene(cells[x, y].Gene).textureRect;
+                t = GeneSet.GetSpriteFromGene(cells[x, y].Gene).texture;
+                r = GeneSet.GetSpriteFromGene(cells[x, y].Gene).textureRect;
                 break;
             }
             case Cell.CellStatus.Collision:
             {
-                t = geneSet.Collision.texture;
-                r = geneSet.Collision.textureRect;
+                t = GeneSet.Collision.texture;
+                r = GeneSet.Collision.textureRect;
                 break;
             }
             default:
             {
-                t = geneSet.Empty.texture;
-                r = geneSet.Empty.textureRect;
+                t = GeneSet.Empty.texture;
+                r = GeneSet.Empty.textureRect;
                 break;
             }
         }
 
         textures[textureX, textureY].SetPixels(chunkX, chunkY,
-            geneSet.width, geneSet.height,
+            GeneSet.width, GeneSet.height,
             t.GetPixels((int) r.x, (int) r.y, (int) r.width, (int) r.height));
     }
 
@@ -315,12 +338,12 @@ public class TileSpawner : MonoBehaviour
             currentPosition.z = -_camera.transform.position.z;
             Vector3 worldPosition = _camera.ScreenToWorldPoint(currentPosition);
 
-            int x = (int) worldPosition.x / geneSet.width;
-            int y = (int) worldPosition.y / geneSet.height;
+            int x = (int) worldPosition.x / GeneSet.width;
+            int y = (int) worldPosition.y / GeneSet.height;
 
             if (x >= 0 && x < width && y >= 0 && y < height)
             {
-                AssignGeneToTile(x, y, geneBrushIndex + geneSet.MinGene, Cell.CellStatus.Normal);
+                AssignGeneToTile(x, y, geneBrushIndex + GeneSet.MinGene, Cell.CellStatus.Normal);
 
                 for (int i = 0; i < width; ++i)
                 {
@@ -469,7 +492,7 @@ public class TileSpawner : MonoBehaviour
             case MutationType.AverageWithRandom:
             {
                 int a = (start.Gene + destination.Gene) / 2;
-                int r = geneSet.GetRandomGene();
+                int r = GeneSet.GetRandomGene();
                 int m = a * 4 + r;
                 m /= 5;
 
@@ -479,7 +502,7 @@ public class TileSpawner : MonoBehaviour
             }
             case MutationType.Random:
             {
-                int m = geneSet.GetRandomGene();
+                int m = GeneSet.GetRandomGene();
 
                 AssignGeneToTile(k, nextGenerationIndex, m, m == 0 ? Cell.CellStatus.Empty : Cell.CellStatus.Normal);
 
@@ -525,7 +548,7 @@ public class TileSpawner : MonoBehaviour
 
         bool bothPositive = cells[r, currentGenerationIndex].Gene > 0 && cells[l, currentGenerationIndex].Gene > 0;
         bool bothNegative = cells[r, currentGenerationIndex].Gene < 0 && cells[l, currentGenerationIndex].Gene < 0;
-        if( bothPositive || bothNegative )
+        if( bothPositive || bothNegative )  // this causes a positive number bias, maybe change this if creating my own
         {
             return rCount + lCount;
         }

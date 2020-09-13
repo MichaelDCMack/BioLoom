@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5518273841004578764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5518273841004578766}
+  - component: {fileID: 5518273841004578765}
+  m_Layer: 0
+  m_Name: GeneSetWeave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5518273841004578766
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5518273841004578764}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5518273841004578765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5518273841004578764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ab3e1e3bdf349c9af572e6ff4ceb54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SetName: Weave Patterns
+  sprites:
+  - {fileID: 7681638265747666764, guid: 55cf0360429584538b7d0522296c7652, type: 3}
+  - {fileID: -762520214249308314, guid: 55cf0360429584538b7d0522296c7652, type: 3}
+  - {fileID: -1273623893867630795, guid: 55cf0360429584538b7d0522296c7652, type: 3}
+  - {fileID: -2957038317093092174, guid: 55cf0360429584538b7d0522296c7652, type: 3}
+  - {fileID: 6141046021016351312, guid: 55cf0360429584538b7d0522296c7652, type: 3}
+  - {fileID: -2537128994085347765, guid: 55cf0360429584538b7d0522296c7652, type: 3}
+  - {fileID: -3398523994252164431, guid: 55cf0360429584538b7d0522296c7652, type: 3}
+  - {fileID: 3651579271449761379, guid: 55cf0360429584538b7d0522296c7652, type: 3}
+  - {fileID: -642777288648329716, guid: 55cf0360429584538b7d0522296c7652, type: 3}
+  - {fileID: -4359990244504917160, guid: 55cf0360429584538b7d0522296c7652, type: 3}
+  - {fileID: -816256529650458235, guid: 55cf0360429584538b7d0522296c7652, type: 3}
+  - {fileID: -2889187578479516875, guid: 55cf0360429584538b7d0522296c7652, type: 3}
+  - {fileID: -1481281283992193282, guid: 55cf0360429584538b7d0522296c7652, type: 3}
+  - {fileID: 716882217077953366, guid: 55cf0360429584538b7d0522296c7652, type: 3}
+  - {fileID: 8519314314493598777, guid: 55cf0360429584538b7d0522296c7652, type: 3}
+  - {fileID: 8755335776561049202, guid: 55cf0360429584538b7d0522296c7652, type: 3}
+  emptySprite: {fileID: 7681638265747666764, guid: 55cf0360429584538b7d0522296c7652,
+    type: 3}
+  collisionSprite: {fileID: 8755335776561049202, guid: 55cf0360429584538b7d0522296c7652,
+    type: 3}
+  height: 32
+  width: 8
+  useStartGene: 0
+  startGene: 0
