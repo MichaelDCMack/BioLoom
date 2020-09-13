@@ -7,7 +7,8 @@ public class Extensions
         int n = array.Length;
         while (n > 1)
         {
-            int k = Random.Range(0, n--);
+            int k = Random.Range(0, n);
+            --n;
             T temp = array[n];
             array[n] = array[k];
             array[k] = temp;
@@ -25,5 +26,10 @@ public class Extensions
             return max;
         }
         return value;
+    }
+
+    public static int Mod(int a, int b)
+    {
+        return ((a %= b) < 0) ? a + b : a;
     }
 }

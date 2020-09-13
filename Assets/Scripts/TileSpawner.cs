@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class TileSpawner : MonoBehaviour
@@ -199,12 +198,18 @@ public class TileSpawner : MonoBehaviour
         {
             for (int j = 0; j < textureDimensionY; ++j)
             {
-                textures[i, j] = new Texture2D(Mathf.Min(width * geneSet.width, PNGSize), Mathf.Min(height * geneSet.height, PNGSize));
+                textures[i, j] = new Texture2D(
+                    Mathf.Min(width * geneSet.width, PNGSize), 
+                    Mathf.Min(height * geneSet.height, PNGSize));
                 Debug.Assert(textures[i, j] != null);
 
                 textures[i, j].filterMode = FilterMode.Point;
 
-                Sprite sprite = Sprite.Create(textures[i, j], new Rect(0, 0, textures[i, j].width, textures[i, j].height), new Vector2(0f, 0f), 1);
+                Sprite sprite = Sprite.Create(
+                    textures[i, j], 
+                    new Rect(0, 0, textures[i, j].width, textures[i, j].height), 
+                    new Vector2(0f, 0f), 
+                    1);
                 Debug.Assert(sprite != null);
 
                 chunks[i, j] = GameObject.Instantiate(chunkPrefab);
@@ -240,7 +245,7 @@ public class TileSpawner : MonoBehaviour
                 {
                     int randomGene = geneSet.GetRandomGene();
 
-                    AssignGeneToTile(x, y, randomGene, Cell.CellStatus.Normal);
+                    AssignGeneToTile(x, y, randomGene, randomGene == 0 ? Cell.CellStatus.Empty : Cell.CellStatus.Normal);
                 }
                 else
                 {
@@ -275,17 +280,23 @@ public class TileSpawner : MonoBehaviour
         switch (status)
         {
             case Cell.CellStatus.Normal:
+            {
                 t = geneSet.GetSpriteFromGene(cells[x, y].Gene).texture;
                 r = geneSet.GetSpriteFromGene(cells[x, y].Gene).textureRect;
                 break;
+            }
             case Cell.CellStatus.Collision:
+            {
                 t = geneSet.Collision.texture;
                 r = geneSet.Collision.textureRect;
                 break;
+            }
             default:
+            {
                 t = geneSet.Empty.texture;
                 r = geneSet.Empty.textureRect;
                 break;
+            }
         }
 
         textures[textureX, textureY].SetPixels(chunkX, chunkY,
@@ -391,7 +402,6 @@ public class TileSpawner : MonoBehaviour
 
     private void Shift(int i)
     {
-        //n := j := this generation[i];
         Cell start = cells[i, currentGenerationIndex];
         Cell current = start;
 
@@ -400,85 +410,95 @@ public class TileSpawner : MonoBehaviour
             return;
         }
 
-        //reproduce: if j = 0 then goto next i;
         int reproductionCounter = 0;
         do
         {
-            //k:= modulo 512 of(i) plus: (j);
             int k = i + current.Gene;
-            while (k < 0 || k >= width)
-            {
-                k = (k + width) % width;
-            }
-
-            //if next generation[k] != 0 then we have a collision
+            k = Extensions.Mod(k, width);
+ 
             Cell destination = cells[k, nextGenerationIndex];
 
-            if (destination.Status != Cell.CellStatus.Empty)
+            switch (destination.Status)
             {
-                switch (mutationType)
+                case Cell.CellStatus.Empty:
                 {
-                    case MutationType.None:
-                        if(destination.Gene != start.Gene)
-                        {
-                            AssignGeneToTile(k, nextGenerationIndex, 0, Cell.CellStatus.Collision);
-                        }
-                        break;
-                    case MutationType.Average:
-                        if (cells[k, currentGenerationIndex].Status != Cell.CellStatus.Empty)
-                        {
-                            int m = (start.Gene + destination.Gene) / 2;
-
-                            AssignGeneToTile(k, nextGenerationIndex, m, Cell.CellStatus.Normal);
-                        }
-                        break;
-                    case MutationType.AverageWithRandom:
-                        if (cells[k, currentGenerationIndex].Status != Cell.CellStatus.Empty)
-                        {
-                            int a = (start.Gene + destination.Gene) / 2;
-                            int r = geneSet.GetRandomGene();
-                            int m = a * 4 + r;
-                            m /= 5;
-
-                            AssignGeneToTile(k, nextGenerationIndex, m, Cell.CellStatus.Normal);
-                        }
-                        break;
-                    case MutationType.Random:
-                        if (cells[k, currentGenerationIndex].Status != Cell.CellStatus.Empty)
-                        {
-                            int m = geneSet.GetRandomGene();
-
-                            AssignGeneToTile(k, nextGenerationIndex, m, Cell.CellStatus.Normal);
-                        }
-                        break;
-                    case MutationType.Barricelli:
-                        if (cells[k, currentGenerationIndex].Status == Cell.CellStatus.Normal)
-                        {
-                            AssignGeneToTile(k, nextGenerationIndex, 0, Cell.CellStatus.Collision);
-                        }
-                        else
-                        {
-                            int d = FindDistance(k);
-
-                            AssignGeneToTile(k, nextGenerationIndex, d, Cell.CellStatus.Normal);
-                        }
-                        break;
+                    AssignGeneToTile(k, nextGenerationIndex, start.Gene, Cell.CellStatus.Normal);
+                    break;
                 }
+                case Cell.CellStatus.Normal:
+                {
+                    //if we're mutating, then return
+                    Mutate(start, destination, k);
+                    return;
+                }
+                case Cell.CellStatus.Collision:
+                {
+                    //if this is a collision from the past, then return
+                    return;
+                }
+            }
+
+            current = cells[k, currentGenerationIndex];
+            
+            ++reproductionCounter;
+            
+        } while (current.Status == Cell.CellStatus.Normal && current.Gene != start.Gene && reproductionCounter < maxReproductions);
+    }
+
+    void Mutate(Cell start, Cell destination, int k)
+    {
+        switch (mutationType)
+        {
+            case MutationType.None:
+            {
+                if (destination.Gene != start.Gene)
+                {
+                    AssignGeneToTile(k, nextGenerationIndex, 0, Cell.CellStatus.Collision);
+                }
+
                 break;
             }
-            else
+            case MutationType.Average:
             {
-                // no collision
+                int m = (start.Gene + destination.Gene) / 2;
 
-                //next generation[k] := n;
-                AssignGeneToTile(k, nextGenerationIndex, start.Gene, Cell.CellStatus.Normal);
+                AssignGeneToTile(k, nextGenerationIndex, m, m == 0 ? Cell.CellStatus.Empty : Cell.CellStatus.Normal);
+                
+                break;
             }
+            case MutationType.AverageWithRandom:
+            {
+                int a = (start.Gene + destination.Gene) / 2;
+                int r = geneSet.GetRandomGene();
+                int m = a * 4 + r;
+                m /= 5;
 
-            //j:= this generation[k];
-            current = cells[k, currentGenerationIndex];
+                AssignGeneToTile(k, nextGenerationIndex, m, m == 0 ? Cell.CellStatus.Empty : Cell.CellStatus.Normal);
+                
+                break;
+            }
+            case MutationType.Random:
+            {
+                int m = geneSet.GetRandomGene();
 
-            ++reproductionCounter;
-        } while (current.Status == Cell.CellStatus.Normal && current.Gene != start.Gene && reproductionCounter < maxReproductions);
+                AssignGeneToTile(k, nextGenerationIndex, m, m == 0 ? Cell.CellStatus.Empty : Cell.CellStatus.Normal);
+
+                break;
+            }
+            case MutationType.Barricelli:
+            {
+                if (cells[k, currentGenerationIndex].Status == Cell.CellStatus.Normal)
+                {
+                    AssignGeneToTile(k, nextGenerationIndex, 0, Cell.CellStatus.Collision);
+                }
+                else
+                {
+                    AssignGeneToTile(k, nextGenerationIndex, FindDistance(k), Cell.CellStatus.Normal);
+                }
+
+                break;
+            }
+        }
     }
 
     int FindDistance(int k)
@@ -488,29 +508,28 @@ public class TileSpawner : MonoBehaviour
 
         while(cells[r, currentGenerationIndex].Status != Cell.CellStatus.Normal)
         {
-            rCount++;
-            r++;
-            r = r % width;
+            ++rCount;
+            ++r;
+            r = Extensions.Mod(r, width);
         }
 
         int lCount = 0;
         int l = k;
 
-        while (cells[l, currentGenerationIndex].Status == Cell.CellStatus.Normal)
+        while (cells[l, currentGenerationIndex].Status != Cell.CellStatus.Normal)
         {
-            lCount++;
-            l--;
-            l = (l + width) % width;
+            ++lCount;
+            --l;
+            l = Extensions.Mod(l, width);
         }
 
-        if( (cells[r, currentGenerationIndex].Gene > 0 && cells[l, currentGenerationIndex].Gene > 0) ||
-            (cells[r, currentGenerationIndex].Gene < 0 && cells[l, currentGenerationIndex].Gene < 0) )
+        bool bothPositive = cells[r, currentGenerationIndex].Gene > 0 && cells[l, currentGenerationIndex].Gene > 0;
+        bool bothNegative = cells[r, currentGenerationIndex].Gene < 0 && cells[l, currentGenerationIndex].Gene < 0;
+        if( bothPositive || bothNegative )
         {
             return rCount + lCount;
         }
-        else
-        {
-            return -(rCount + lCount);
-        }
+
+        return -(rCount + lCount);
     }
 }

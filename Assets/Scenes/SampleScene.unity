@@ -211,6 +211,74 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &99799700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 99799702}
+  - component: {fileID: 99799701}
+  m_Layer: 0
+  m_Name: GeneSetColorWeave
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &99799701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99799700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ab3e1e3bdf349c9af572e6ff4ceb54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 3885393171412495387, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: 7803866263314904691, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: -5566692066478168620, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: -3154687815925141686, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: 8707845403953016928, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: -5512739020116335643, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: 1732707709429743116, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: 2041038525430691288, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: 6311442305085583121, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: 1298712200992154189, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: 8527670776781577407, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: 1133068339372006825, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: -6084948205383487944, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: -7832655097021600075, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: 1673902592103140375, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  - {fileID: -4328991395358305675, guid: c491e3666d82e446cbb2a1e559f0b792, type: 3}
+  emptySprite: {fileID: 3885393171412495387, guid: c491e3666d82e446cbb2a1e559f0b792,
+    type: 3}
+  collisionSprite: {fileID: -4328991395358305675, guid: c491e3666d82e446cbb2a1e559f0b792,
+    type: 3}
+  height: 32
+  width: 8
+  useStartGene: 0
+  startGene: 0
+--- !u!4 &99799702
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99799700}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -468.00787, y: 715.60284, z: -1832.718}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &100050809
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,7 +1178,7 @@ GameObject:
   - component: {fileID: 512168918}
   - component: {fileID: 512168917}
   m_Layer: 0
-  m_Name: GeneSet
+  m_Name: GeneSetWeave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1873,18 +1941,18 @@ MonoBehaviour:
   currentSeedText: {fileID: 319471799}
   heightField: {fileID: 1948318587}
   widthField: {fileID: 2141460498}
-  geneSet: {fileID: 70668771}
+  geneSet: {fileID: 99799701}
   width: 256
-  height: 256
+  height: 1024
   currentGenerationIndex: 0
   nextGenerationIndex: 1
-  maxReproductions: 2
+  maxReproductions: 3
   PNGSize: 4096
   shuffleTileMapping: 0
   useSeed: 0
   seed: 0
   shuffleIndexArray: 1
-  mutationType: 2
+  mutationType: 1
 --- !u!4 &836111527
 Transform:
   m_ObjectHideFlags: 0

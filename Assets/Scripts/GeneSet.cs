@@ -62,7 +62,7 @@ public class GeneSet : MonoBehaviour
     
     public int GetRandomGene()
     {
-        return Random.Range(MinGene, MaxGene);
+        return Random.Range(MinGene, MaxGene + 1);
     }
 
     public Sprite GetSpriteFromGene(int gene)
