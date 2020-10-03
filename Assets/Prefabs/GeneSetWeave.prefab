@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ab3e1e3bdf349c9af572e6ff4ceb54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SetName: Weave Patterns
+  SetName: 8 End Shaded Satins
   sprites:
   - {fileID: 7681638265747666764, guid: 55cf0360429584538b7d0522296c7652, type: 3}
   - {fileID: -762520214249308314, guid: 55cf0360429584538b7d0522296c7652, type: 3}
