@@ -1,0 +1,1573 @@
+fileFormatVersion: 2
+guid: f31b3752d0a5e47598d4dd955746db2f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -958472621758750706
+    second: 1:7 Shaded Twill_0
+  - first:
+      213: -3293088035269941710
+    second: 1:7 Shaded Twill_1
+  - first:
+      213: 1306262913607523172
+    second: 1:7 Shaded Twill_2
+  - first:
+      213: 1534875430330086430
+    second: 1:7 Shaded Twill_3
+  - first:
+      213: 2390535518240693446
+    second: 1:7 Shaded Twill_4
+  - first:
+      213: 2153214975388117533
+    second: 1:7 Shaded Twill_5
+  - first:
+      213: -20926228306024100
+    second: 1:7 Shaded Twill_6
+  - first:
+      213: -8538912764055640330
+    second: 1:7 Shaded Twill_7
+  - first:
+      213: 8986860067379695828
+    second: 1:7 Shaded Twill_8
+  - first:
+      213: -8145298971792482429
+    second: 1:7 Shaded Twill_9
+  - first:
+      213: 3193137897536694398
+    second: 1:7 Shaded Twill_10
+  - first:
+      213: -6488968828341808491
+    second: 1:7 Shaded Twill_11
+  - first:
+      213: -891843153140808476
+    second: 1:7 Shaded Twill_12
+  - first:
+      213: -6483651393985901443
+    second: 1:7 Shaded Twill_13
+  - first:
+      213: 7594156722501568181
+    second: 1:7 Shaded Twill_14
+  - first:
+      213: 762522059396575169
+    second: 1:7 Shaded Twill_15
+  - first:
+      213: 1896609387273072061
+    second: 1:7 Shaded Twill_16
+  - first:
+      213: -3774017636027064585
+    second: 1:7 Shaded Twill_17
+  - first:
+      213: 5816903067133704164
+    second: 1:7 Shaded Twill_18
+  - first:
+      213: 6178656120874057208
+    second: 1:7 Shaded Twill_19
+  - first:
+      213: -8397966061637391390
+    second: 1:7 Shaded Twill_20
+  - first:
+      213: 6188276966402158561
+    second: 1:7 Shaded Twill_21
+  - first:
+      213: -2758130182797184265
+    second: 1:7 Shaded Twill_22
+  - first:
+      213: 2128068028767513178
+    second: 1:7 Shaded Twill_23
+  - first:
+      213: 2620866738444678908
+    second: 1:7 Shaded Twill_24
+  - first:
+      213: 8940467011254445387
+    second: 1:7 Shaded Twill_25
+  - first:
+      213: 1069378686960389635
+    second: 1:7 Shaded Twill_26
+  - first:
+      213: 5261703552705780518
+    second: 1:7 Shaded Twill_27
+  - first:
+      213: -1358693526276330838
+    second: 1:7 Shaded Twill_28
+  - first:
+      213: 2418705659272021187
+    second: 1:7 Shaded Twill_29
+  - first:
+      213: 5109239879794350463
+    second: 1:7 Shaded Twill_30
+  - first:
+      213: 7415432520222375536
+    second: 1:7 Shaded Twill_31
+  - first:
+      213: -1541675336452723230
+    second: 1:7 Shaded Twill_32
+  - first:
+      213: -4553589201607511366
+    second: 1:7 Shaded Twill_33
+  - first:
+      213: -7258856310246917315
+    second: 1:7 Shaded Twill_34
+  - first:
+      213: 990047382666378517
+    second: 1:7 Shaded Twill_35
+  - first:
+      213: 7055356878298952992
+    second: 1:7 Shaded Twill_36
+  - first:
+      213: 3830053117442901419
+    second: 1:7 Shaded Twill_37
+  - first:
+      213: 7099146064151982782
+    second: 1:7 Shaded Twill_38
+  - first:
+      213: -1423436635086314543
+    second: 1:7 Shaded Twill_39
+  - first:
+      213: 5752816258112200386
+    second: 1:7 Shaded Twill_40
+  - first:
+      213: -4508166720674618660
+    second: 1:7 Shaded Twill_41
+  - first:
+      213: 2231679285548004538
+    second: 1:7 Shaded Twill_42
+  - first:
+      213: -7031156935154825881
+    second: 1:7 Shaded Twill_43
+  - first:
+      213: -2823207488674555161
+    second: 1:7 Shaded Twill_44
+  - first:
+      213: 9142275661877668975
+    second: 1:7 Shaded Twill_45
+  - first:
+      213: 1353923649355992596
+    second: 1:7 Shaded Twill_46
+  - first:
+      213: -4879498103220343858
+    second: 1:7 Shaded Twill_47
+  - first:
+      213: 5172449433981714043
+    second: 1:7 Shaded Twill_48
+  - first:
+      213: -2917164453805028452
+    second: 1:7 Shaded Twill_49
+  - first:
+      213: -3655072132971873865
+    second: 1:7 Shaded Twill_50
+  - first:
+      213: -7251983105062108343
+    second: 1:7 Shaded Twill_51
+  - first:
+      213: 8209286682788715087
+    second: 1:7 Shaded Twill_52
+  - first:
+      213: 1015886716859081455
+    second: 1:7 Shaded Twill_53
+  - first:
+      213: 1125172099733017703
+    second: 1:7 Shaded Twill_54
+  - first:
+      213: 4238126890858129496
+    second: 1:7 Shaded Twill_55
+  - first:
+      213: -2453602457231869049
+    second: 1:7 Shaded Twill_56
+  - first:
+      213: 169328635039095171
+    second: 1:7 Shaded Twill_57
+  - first:
+      213: 5628833686854190683
+    second: 1:7 Shaded Twill_58
+  - first:
+      213: -1651526578204523638
+    second: 1:7 Shaded Twill_59
+  - first:
+      213: 8427708456142425526
+    second: 1:7 Shaded Twill_60
+  - first:
+      213: -5780013541362812166
+    second: 1:7 Shaded Twill_61
+  - first:
+      213: 4737936559915763410
+    second: 1:7 Shaded Twill_62
+  - first:
+      213: -8052806403461757990
+    second: 1:7 Shaded Twill_63
+  - first:
+      213: 7633351031081865130
+    second: 1:7 Shaded Twill_64
+  - first:
+      213: 882239659882040913
+    second: 1:7 Shaded Twill_65
+  - first:
+      213: -7768334560894990644
+    second: 1:7 Shaded Twill_66
+  - first:
+      213: 8470941818046058880
+    second: 1:7 Shaded Twill_67
+  - first:
+      213: -6143473858804711586
+    second: 1:7 Shaded Twill_68
+  - first:
+      213: 1942797046760889386
+    second: 1:7 Shaded Twill_69
+  - first:
+      213: 836124511847883800
+    second: 1:7 Shaded Twill_70
+  - first:
+      213: -8025640284297575781
+    second: 1:7 Shaded Twill_71
+  - first:
+      213: 5901225438664814067
+    second: 1:7 Shaded Twill_72
+  - first:
+      213: 8186766880531240744
+    second: 1:7 Shaded Twill_73
+  - first:
+      213: 3916128867880207301
+    second: 1:7 Shaded Twill_74
+  - first:
+      213: -5519108290666153841
+    second: 1:7 Shaded Twill_75
+  - first:
+      213: -698446294958059464
+    second: 1:7 Shaded Twill_76
+  - first:
+      213: 3357254456556433988
+    second: 1:7 Shaded Twill_77
+  - first:
+      213: -4756686519101340023
+    second: 1:7 Shaded Twill_78
+  - first:
+      213: 5781702300819234559
+    second: 1:7 Shaded Twill_79
+  - first:
+      213: 5450916989814925322
+    second: 1:7 Shaded Twill_80
+  - first:
+      213: -3245229149137830535
+    second: 1:7 Shaded Twill_81
+  - first:
+      213: 7589230948235583748
+    second: 1:7 Shaded Twill_82
+  - first:
+      213: -2483065395118949899
+    second: 1:7 Shaded Twill_83
+  - first:
+      213: 2746404009155844990
+    second: 1:7 Shaded Twill_84
+  - first:
+      213: -7831440021531738268
+    second: 1:7 Shaded Twill_85
+  - first:
+      213: -8162809502148786945
+    second: 1:7 Shaded Twill_86
+  - first:
+      213: 6514246448144828992
+    second: 1:7 Shaded Twill_87
+  - first:
+      213: -5372373721179595585
+    second: 1:7 Shaded Twill_88
+  - first:
+      213: -7748586488585506583
+    second: 1:7 Shaded Twill_89
+  - first:
+      213: -4476459048968871062
+    second: 1:7 Shaded Twill_90
+  - first:
+      213: 4537538201018885770
+    second: 1:7 Shaded Twill_91
+  - first:
+      213: 7723413852435795922
+    second: 1:7 Shaded Twill_92
+  - first:
+      213: -8845485858604716242
+    second: 1:7 Shaded Twill_93
+  - first:
+      213: 2683647016331482694
+    second: 1:7 Shaded Twill_94
+  - first:
+      213: -3430092923526473568
+    second: 1:7 Shaded Twill_95
+  - first:
+      213: 8091085291127757275
+    second: 1:7 Shaded Twill_96
+  - first:
+      213: -8456208456837904855
+    second: 1:7 Shaded Twill_97
+  - first:
+      213: 8144896221600376504
+    second: 1:7 Shaded Twill_98
+  - first:
+      213: 6107524754476752858
+    second: 1:7 Shaded Twill_99
+  - first:
+      213: -1561976394197722809
+    second: 1:7 Shaded Twill_100
+  - first:
+      213: -2086678120007081044
+    second: 1:7 Shaded Twill_101
+  - first:
+      213: 6718561529763077592
+    second: 1:7 Shaded Twill_102
+  - first:
+      213: 3663296067580381849
+    second: 1:7 Shaded Twill_103
+  - first:
+      213: 8543519318671498677
+    second: 1:7 Shaded Twill_104
+  - first:
+      213: 1101928502896166783
+    second: 1:7 Shaded Twill_105
+  - first:
+      213: -4141474771145765897
+    second: 1:7 Shaded Twill_106
+  - first:
+      213: -7544690107853395393
+    second: 1:7 Shaded Twill_107
+  - first:
+      213: -8256271277921218829
+    second: 1:7 Shaded Twill_108
+  - first:
+      213: -6413595547754481952
+    second: 1:7 Shaded Twill_109
+  - first:
+      213: 4994717972453631311
+    second: 1:7 Shaded Twill_110
+  - first:
+      213: -7103351871840101003
+    second: 1:7 Shaded Twill_111
+  - first:
+      213: -1360995828991606500
+    second: 1:7 Shaded Twill_112
+  - first:
+      213: 8727278776156531856
+    second: 1:7 Shaded Twill_113
+  - first:
+      213: 938083217085937373
+    second: 1:7 Shaded Twill_114
+  - first:
+      213: -5838192136669995225
+    second: 1:7 Shaded Twill_115
+  - first:
+      213: 1367873938881039087
+    second: 1:7 Shaded Twill_116
+  - first:
+      213: -8483726221998740127
+    second: 1:7 Shaded Twill_117
+  - first:
+      213: -489787496130376836
+    second: 1:7 Shaded Twill_118
+  - first:
+      213: -745657543877390190
+    second: 1:7 Shaded Twill_119
+  - first:
+      213: -1796679204063969902
+    second: 1:7 Shaded Twill_120
+  - first:
+      213: 3525507457359913126
+    second: 1:7 Shaded Twill_121
+  - first:
+      213: -6187949422034405427
+    second: 1:7 Shaded Twill_122
+  - first:
+      213: -1446418780297284894
+    second: 1:7 Shaded Twill_123
+  - first:
+      213: 2080506253058505364
+    second: 1:7 Shaded Twill_124
+  - first:
+      213: -1751989041747585863
+    second: 1:7 Shaded Twill_125
+  - first:
+      213: 6045304688265206788
+    second: 1:7 Shaded Twill_126
+  - first:
+      213: -2224629973086965448
+    second: 1:7 Shaded Twill_127
+  - first:
+      213: -8109974166397919981
+    second: 1:7 Shaded Twill_128
+  - first:
+      213: -421431279845820831
+    second: 1:7 Shaded Twill_129
+  - first:
+      213: -7394224850011601737
+    second: 1:7 Shaded Twill_130
+  - first:
+      213: 8769632670361055411
+    second: 1:7 Shaded Twill_131
+  - first:
+      213: 2974016695889278155
+    second: 1:7 Shaded Twill_132
+  - first:
+      213: -2537361860128992243
+    second: 1:7 Shaded Twill_133
+  - first:
+      213: 4681279111198539473
+    second: 1:7 Shaded Twill_134
+  - first:
+      213: 7547614462507747355
+    second: 1:7 Shaded Twill_135
+  - first:
+      213: -1527740842168289905
+    second: 1:7 Shaded Twill_136
+  - first:
+      213: 1935685427493712880
+    second: 1:7 Shaded Twill_137
+  - first:
+      213: -7097351864068459239
+    second: 1:7 Shaded Twill_138
+  - first:
+      213: 567532579454036035
+    second: 1:7 Shaded Twill_139
+  - first:
+      213: 3343558980257869096
+    second: 1:7 Shaded Twill_140
+  - first:
+      213: -8890093979953853505
+    second: 1:7 Shaded Twill_141
+  - first:
+      213: 3917807415278887650
+    second: 1:7 Shaded Twill_142
+  - first:
+      213: -2827885381419031285
+    second: 1:7 Shaded Twill_143
+  - first:
+      213: 1418626501015007566
+    second: 1:7 Shaded Twill_144
+  - first:
+      213: 1262417163155795657
+    second: 1:7 Shaded Twill_145
+  - first:
+      213: -7166190262374810877
+    second: 1:7 Shaded Twill_146
+  - first:
+      213: 6897370136448028583
+    second: 1:7 Shaded Twill_147
+  - first:
+      213: -3583280696003628853
+    second: 1:7 Shaded Twill_148
+  - first:
+      213: 3841250904083402762
+    second: 1:7 Shaded Twill_149
+  - first:
+      213: -7199616121102010182
+    second: 1:7 Shaded Twill_150
+  - first:
+      213: 8564128730221464039
+    second: 1:7 Shaded Twill_151
+  - first:
+      213: 8090112695004818175
+    second: 1:7 Shaded Twill_152
+  - first:
+      213: -956664941271905703
+    second: 1:7 Shaded Twill_153
+  - first:
+      213: -6298976331614003602
+    second: 1:7 Shaded Twill_154
+  - first:
+      213: -5788430131918553904
+    second: 1:7 Shaded Twill_155
+  - first:
+      213: -8184540475660346985
+    second: 1:7 Shaded Twill_156
+  - first:
+      213: -1486871127651920506
+    second: 1:7 Shaded Twill_157
+  - first:
+      213: -3299252904933533354
+    second: 1:7 Shaded Twill_158
+  - first:
+      213: -8951446085473012521
+    second: 1:7 Shaded Twill_159
+  - first:
+      213: -3818527335226335654
+    second: 1:7 Shaded Twill_160
+  - first:
+      213: 1648736566259943932
+    second: 1:7 Shaded Twill_161
+  - first:
+      213: -3703008628770287969
+    second: 1:7 Shaded Twill_162
+  - first:
+      213: 4494905351129653690
+    second: 1:7 Shaded Twill_163
+  - first:
+      213: 9076016908725511625
+    second: 1:7 Shaded Twill_164
+  - first:
+      213: 1311038292307155001
+    second: 1:7 Shaded Twill_165
+  - first:
+      213: -6166903766533340287
+    second: 1:7 Shaded Twill_166
+  - first:
+      213: 8801697212408625809
+    second: 1:7 Shaded Twill_167
+  - first:
+      213: -6547381909360232807
+    second: 1:7 Shaded Twill_168
+  - first:
+      213: 7270134097562087663
+    second: 1:7 Shaded Twill_169
+  - first:
+      213: -2039055462739261048
+    second: 1:7 Shaded Twill_170
+  - first:
+      213: 6370206729481422127
+    second: 1:7 Shaded Twill_171
+  - first:
+      213: 981690229324488192
+    second: 1:7 Shaded Twill_172
+  - first:
+      213: -6697842742296766557
+    second: 1:7 Shaded Twill_173
+  - first:
+      213: 3125904068349255252
+    second: 1:7 Shaded Twill_174
+  - first:
+      213: -8769506872446920328
+    second: 1:7 Shaded Twill_175
+  - first:
+      213: -2897793007896437649
+    second: 1:7 Shaded Twill_176
+  - first:
+      213: -8375686128326941825
+    second: 1:7 Shaded Twill_177
+  - first:
+      213: 3583549197234213196
+    second: 1:7 Shaded Twill_178
+  - first:
+      213: -4407953310879810844
+    second: 1:7 Shaded Twill_179
+  - first:
+      213: -7252074737353169543
+    second: 1:7 Shaded Twill_180
+  - first:
+      213: -3251523603469919884
+    second: 1:7 Shaded Twill_181
+  - first:
+      213: -1527459187981171387
+    second: 1:7 Shaded Twill_182
+  - first:
+      213: -7012979956445580411
+    second: 1:7 Shaded Twill_183
+  - first:
+      213: -8737749063077776601
+    second: 1:7 Shaded Twill_184
+  - first:
+      213: -4856574561374825058
+    second: 1:7 Shaded Twill_185
+  - first:
+      213: -5542115929120545922
+    second: 1:7 Shaded Twill_186
+  - first:
+      213: 8438417171616620006
+    second: 1:7 Shaded Twill_187
+  - first:
+      213: -8086449315292081324
+    second: 1:7 Shaded Twill_188
+  - first:
+      213: 7250736893899424813
+    second: 1:7 Shaded Twill_189
+  - first:
+      213: 1618495804330799553
+    second: 1:7 Shaded Twill_190
+  - first:
+      213: 8642208974969151417
+    second: 1:7 Shaded Twill_191
+  - first:
+      213: -271393457274570293
+    second: 1:7 Shaded Twill_192
+  - first:
+      213: -2413606768264744151
+    second: 1:7 Shaded Twill_193
+  - first:
+      213: 7891128359331639574
+    second: 1:7 Shaded Twill_194
+  - first:
+      213: 2366551968882985150
+    second: 1:7 Shaded Twill_195
+  - first:
+      213: -7836220190067332293
+    second: 1:7 Shaded Twill_196
+  - first:
+      213: -3110425730812114671
+    second: 1:7 Shaded Twill_197
+  - first:
+      213: -3345834950066674513
+    second: 1:7 Shaded Twill_198
+  - first:
+      213: 6327076105704598917
+    second: 1:7 Shaded Twill_199
+  - first:
+      213: 5771478233901827101
+    second: 1:7 Shaded Twill_200
+  - first:
+      213: 2902238314647419302
+    second: 1:7 Shaded Twill_201
+  - first:
+      213: -1354052398970390975
+    second: 1:7 Shaded Twill_202
+  - first:
+      213: 6202258918333278406
+    second: 1:7 Shaded Twill_203
+  - first:
+      213: -580568725640784174
+    second: 1:7 Shaded Twill_204
+  - first:
+      213: -2097796148224925540
+    second: 1:7 Shaded Twill_205
+  - first:
+      213: 1408756912737705678
+    second: 1:7 Shaded Twill_206
+  - first:
+      213: 8254126032931420461
+    second: 1:7 Shaded Twill_207
+  - first:
+      213: 3489326961840466480
+    second: 1:7 Shaded Twill_208
+  - first:
+      213: 2707575887090594394
+    second: 1:7 Shaded Twill_209
+  - first:
+      213: 354402547823131464
+    second: 1:7 Shaded Twill_210
+  - first:
+      213: 5956503607329075296
+    second: 1:7 Shaded Twill_211
+  - first:
+      213: -157279071052533705
+    second: 1:7 Shaded Twill_212
+  - first:
+      213: 5126366422059821758
+    second: 1:7 Shaded Twill_213
+  - first:
+      213: -5102214439323454665
+    second: 1:7 Shaded Twill_214
+  - first:
+      213: 5919476077351340279
+    second: 1:7 Shaded Twill_215
+  - first:
+      213: 3804461911952254567
+    second: 1:7 Shaded Twill_216
+  - first:
+      213: 373641345180818300
+    second: 1:7 Shaded Twill_217
+  - first:
+      213: -6529265633345033856
+    second: 1:7 Shaded Twill_218
+  - first:
+      213: 4138324743305537483
+    second: 1:7 Shaded Twill_219
+  - first:
+      213: -7476151392823371182
+    second: 1:7 Shaded Twill_220
+  - first:
+      213: 5213014431435844139
+    second: 1:7 Shaded Twill_221
+  - first:
+      213: 7513813811995659939
+    second: 1:7 Shaded Twill_222
+  - first:
+      213: -2993708718616306448
+    second: 1:7 Shaded Twill_223
+  - first:
+      213: 3374150580237584128
+    second: 1:7 Shaded Twill_224
+  - first:
+      213: -1201110237475143441
+    second: 1:7 Shaded Twill_225
+  - first:
+      213: -5379184766464946271
+    second: 1:7 Shaded Twill_226
+  - first:
+      213: -6105620303111645116
+    second: 1:7 Shaded Twill_227
+  - first:
+      213: -2474506262707842883
+    second: 1:7 Shaded Twill_228
+  - first:
+      213: -6094183708515389410
+    second: 1:7 Shaded Twill_229
+  - first:
+      213: 2763886761004257693
+    second: 1:7 Shaded Twill_230
+  - first:
+      213: -4662583756978547546
+    second: 1:7 Shaded Twill_231
+  - first:
+      213: 5735764267654070939
+    second: 1:7 Shaded Twill_232
+  - first:
+      213: 7272983478937397328
+    second: 1:7 Shaded Twill_233
+  - first:
+      213: -8942920877693143863
+    second: 1:7 Shaded Twill_234
+  - first:
+      213: -1688166463573556889
+    second: 1:7 Shaded Twill_235
+  - first:
+      213: -2130402276998784566
+    second: 1:7 Shaded Twill_236
+  - first:
+      213: 3414037497587711122
+    second: 1:7 Shaded Twill_237
+  - first:
+      213: -3921532489794958813
+    second: 1:7 Shaded Twill_238
+  - first:
+      213: 8993915899788033155
+    second: 1:7 Shaded Twill_239
+  - first:
+      213: 2679331822317693590
+    second: 1:7 Shaded Twill_240
+  - first:
+      213: 1333790242457717387
+    second: 1:7 Shaded Twill_241
+  - first:
+      213: -9047241747789612109
+    second: 1:7 Shaded Twill_242
+  - first:
+      213: -2102757848868231772
+    second: 1:7 Shaded Twill_243
+  - first:
+      213: 363395809574174535
+    second: 1:7 Shaded Twill_244
+  - first:
+      213: -5820884497979594473
+    second: 1:7 Shaded Twill_245
+  - first:
+      213: 1007513717376609632
+    second: 1:7 Shaded Twill_246
+  - first:
+      213: 5342201275145573023
+    second: 1:7 Shaded Twill_247
+  - first:
+      213: -5330554761780133483
+    second: 1:7 Shaded Twill_248
+  - first:
+      213: -829338734624387277
+    second: 1:7 Shaded Twill_249
+  - first:
+      213: 1667838296053559686
+    second: 1:7 Shaded Twill_250
+  - first:
+      213: -3171974523610929090
+    second: 1:7 Shaded Twill_251
+  - first:
+      213: -44310934672994792
+    second: 1:7 Shaded Twill_252
+  - first:
+      213: 4644906362589819873
+    second: 1:7 Shaded Twill_253
+  - first:
+      213: 70669866118024546
+    second: 1:7 Shaded Twill_254
+  - first:
+      213: 2283160831129681416
+    second: 1:7 Shaded Twill_255
+  - first:
+      213: 3343547407978258097
+    second: 1:7 Shaded Twill_256
+  - first:
+      213: -5083134122921083033
+    second: 1:7 Shaded Twill_257
+  - first:
+      213: -7864136048690498673
+    second: 1:7 Shaded Twill_258
+  - first:
+      213: -2851041174103427319
+    second: 1:7 Shaded Twill_259
+  - first:
+      213: 7339953365468380486
+    second: 1:7 Shaded Twill_260
+  - first:
+      213: 445106693413562821
+    second: 1:7 Shaded Twill_261
+  - first:
+      213: 6377161821949466731
+    second: 1:7 Shaded Twill_262
+  - first:
+      213: 9198420572807652454
+    second: 1:7 Shaded Twill_263
+  - first:
+      213: 3534194072743866109
+    second: 1:7 Shaded Twill_264
+  - first:
+      213: -4098011573076644228
+    second: 1:7 Shaded Twill_265
+  - first:
+      213: -7044255411623956571
+    second: 1:7 Shaded Twill_266
+  - first:
+      213: 5806754056904994984
+    second: 1:7 Shaded Twill_267
+  - first:
+      213: -6408354375028960334
+    second: 1:7 Shaded Twill_268
+  - first:
+      213: -6567569376187517190
+    second: 1:7 Shaded Twill_269
+  - first:
+      213: 7411492323688699256
+    second: 1:7 Shaded Twill_270
+  - first:
+      213: -52566379149695237
+    second: 1:7 Shaded Twill_271
+  - first:
+      213: -6526851768352589474
+    second: 1:7 Shaded Twill_272
+  - first:
+      213: 2740108529635589972
+    second: 1:7 Shaded Twill_273
+  - first:
+      213: -9080944418188399356
+    second: 1:7 Shaded Twill_274
+  - first:
+      213: -1045032333901616187
+    second: 1:7 Shaded Twill_275
+  - first:
+      213: -8627477680026023192
+    second: 1:7 Shaded Twill_276
+  - first:
+      213: 8526873000588766928
+    second: 1:7 Shaded Twill_277
+  - first:
+      213: -4370683332699593596
+    second: 1:7 Shaded Twill_278
+  - first:
+      213: -2818287590903420259
+    second: 1:7 Shaded Twill_279
+  - first:
+      213: -5291573921250658693
+    second: 1:7 Shaded Twill_280
+  - first:
+      213: 6054125571488309566
+    second: 1:7 Shaded Twill_281
+  - first:
+      213: 8318103434251116675
+    second: 1:7 Shaded Twill_282
+  - first:
+      213: 8591642492663270290
+    second: 1:7 Shaded Twill_283
+  - first:
+      213: 5035675292509978554
+    second: 1:7 Shaded Twill_284
+  - first:
+      213: 578224487395698793
+    second: 1:7 Shaded Twill_285
+  - first:
+      213: -8988171673270154416
+    second: 1:7 Shaded Twill_286
+  - first:
+      213: 8172264914211957464
+    second: 1:7 Shaded Twill_287
+  - first:
+      213: 4254419010446512437
+    second: 1:7 Shaded Twill_288
+  - first:
+      213: 3656689195655878744
+    second: 1:7 Shaded Twill_289
+  - first:
+      213: -8578287180541545503
+    second: 1:7 Shaded Twill_290
+  - first:
+      213: -5834320978134405442
+    second: 1:7 Shaded Twill_291
+  - first:
+      213: 4412518336875611847
+    second: 1:7 Shaded Twill_292
+  - first:
+      213: -5241724768536638731
+    second: 1:7 Shaded Twill_293
+  - first:
+      213: -6605357260155132803
+    second: 1:7 Shaded Twill_294
+  - first:
+      213: -5599527298016403991
+    second: 1:7 Shaded Twill_295
+  - first:
+      213: -4919043136025107631
+    second: 1:7 Shaded Twill_296
+  - first:
+      213: -7511688430697471340
+    second: 1:7 Shaded Twill_297
+  - first:
+      213: 7703109014524324728
+    second: 1:7 Shaded Twill_298
+  - first:
+      213: -7504700617202653463
+    second: 1:7 Shaded Twill_299
+  - first:
+      213: -5992804188382764725
+    second: 1:7 Shaded Twill_300
+  - first:
+      213: -905895009375412953
+    second: 1:7 Shaded Twill_301
+  - first:
+      213: -7452405715552995928
+    second: 1:7 Shaded Twill_302
+  - first:
+      213: 8603377029453799866
+    second: 1:7 Shaded Twill_303
+  - first:
+      213: 6387646063548266373
+    second: 1:7 Shaded Twill_304
+  - first:
+      213: 2820862915494520876
+    second: 1:7 Shaded Twill_305
+  - first:
+      213: -161838346612117413
+    second: 1:7 Shaded Twill_306
+  - first:
+      213: -7124551989729045130
+    second: 1:7 Shaded Twill_307
+  - first:
+      213: 7939666152186896249
+    second: 1:7 Shaded Twill_308
+  - first:
+      213: 6567485137990805031
+    second: 1:7 Shaded Twill_309
+  - first:
+      213: -682001086855820433
+    second: 1:7 Shaded Twill_310
+  - first:
+      213: -5488597289833969980
+    second: 1:7 Shaded Twill_311
+  - first:
+      213: 7279501826645878422
+    second: 1:7 Shaded Twill_312
+  - first:
+      213: -1062970050252173021
+    second: 1:7 Shaded Twill_313
+  - first:
+      213: -1739679387069710795
+    second: 1:7 Shaded Twill_314
+  - first:
+      213: -2295564782213802748
+    second: 1:7 Shaded Twill_315
+  - first:
+      213: 876921599868711451
+    second: 1:7 Shaded Twill_316
+  - first:
+      213: 4824992107909116597
+    second: 1:7 Shaded Twill_317
+  - first:
+      213: 4306563201597479413
+    second: 1:7 Shaded Twill_318
+  - first:
+      213: -4135947165596541150
+    second: 1:7 Shaded Twill_319
+  - first:
+      213: 1998193469931004190
+    second: 1:7 Shaded Twill_320
+  - first:
+      213: -4105160293925064008
+    second: 1:7 Shaded Twill_321
+  - first:
+      213: 3725859236850155579
+    second: 1:7 Shaded Twill_322
+  - first:
+      213: -716020380483458960
+    second: 1:7 Shaded Twill_323
+  - first:
+      213: 2534517243400980863
+    second: 1:7 Shaded Twill_324
+  - first:
+      213: -7706898114623146043
+    second: 1:7 Shaded Twill_325
+  - first:
+      213: 4035326890970554577
+    second: 1:7 Shaded Twill_326
+  - first:
+      213: 112119596126574958
+    second: 1:7 Shaded Twill_327
+  - first:
+      213: -3124873963380733265
+    second: 1:7 Shaded Twill_328
+  - first:
+      213: -5476266991889881337
+    second: 1:7 Shaded Twill_329
+  - first:
+      213: 9050261191134807649
+    second: 1:7 Shaded Twill_330
+  - first:
+      213: 4453647649463255612
+    second: 1:7 Shaded Twill_331
+  - first:
+      213: -5761597352944610746
+    second: 1:7 Shaded Twill_332
+  - first:
+      213: -1623235136317394539
+    second: 1:7 Shaded Twill_333
+  - first:
+      213: 6109829645062119523
+    second: 1:7 Shaded Twill_334
+  - first:
+      213: 6712654523816312978
+    second: 1:7 Shaded Twill_335
+  - first:
+      213: 5704703705442339957
+    second: 1:7 Shaded Twill_336
+  - first:
+      213: 7994462295800483265
+    second: 1:7 Shaded Twill_337
+  - first:
+      213: -1875266030603229162
+    second: 1:7 Shaded Twill_338
+  - first:
+      213: -8165306271088858618
+    second: 1:7 Shaded Twill_339
+  - first:
+      213: -4105717949189418763
+    second: 1:7 Shaded Twill_340
+  - first:
+      213: -2214373224357285674
+    second: 1:7 Shaded Twill_341
+  - first:
+      213: -5894552497631666382
+    second: 1:7 Shaded Twill_342
+  - first:
+      213: -19140651509907614
+    second: 1:7 Shaded Twill_343
+  - first:
+      213: -4691950313985188099
+    second: 1:7 Shaded Twill_344
+  - first:
+      213: 3799441730253254158
+    second: 1:7 Shaded Twill_345
+  - first:
+      213: 1217111274294134938
+    second: 1:7 Shaded Twill_346
+  - first:
+      213: -8795581409059530990
+    second: 1:7 Shaded Twill_347
+  - first:
+      213: 2139181840911804141
+    second: 1:7 Shaded Twill_348
+  - first:
+      213: 7585256595123015733
+    second: 1:7 Shaded Twill_349
+  - first:
+      213: -8848010457199619608
+    second: 1:7 Shaded Twill_350
+  - first:
+      213: -4829127889881990330
+    second: 1:7 Shaded Twill_351
+  - first:
+      213: -3561595132546333417
+    second: 1:7 Shaded Twill_352
+  - first:
+      213: 2135030027541178214
+    second: 1:7 Shaded Twill_353
+  - first:
+      213: 4791786258112664935
+    second: 1:7 Shaded Twill_354
+  - first:
+      213: -6170025384844065497
+    second: 1:7 Shaded Twill_355
+  - first:
+      213: 6736186496071103971
+    second: 1:7 Shaded Twill_356
+  - first:
+      213: -1772829617884998181
+    second: 1:7 Shaded Twill_357
+  - first:
+      213: -3882858130832585734
+    second: 1:7 Shaded Twill_358
+  - first:
+      213: 699601070744195112
+    second: 1:7 Shaded Twill_359
+  - first:
+      213: -3996687336273370808
+    second: 1:7 Shaded Twill_360
+  - first:
+      213: -5718856431166363043
+    second: 1:7 Shaded Twill_361
+  - first:
+      213: -5099285231245031022
+    second: 1:7 Shaded Twill_362
+  - first:
+      213: -374717368936130874
+    second: 1:7 Shaded Twill_363
+  - first:
+      213: -2600950289408520289
+    second: 1:7 Shaded Twill_364
+  - first:
+      213: -15611921605620930
+    second: 1:7 Shaded Twill_365
+  - first:
+      213: 2162483115448298560
+    second: 1:7 Shaded Twill_366
+  - first:
+      213: 2398479825331055671
+    second: 1:7 Shaded Twill_367
+  - first:
+      213: -1960733712772914341
+    second: 1:7 Shaded Twill_368
+  - first:
+      213: -6088684524366721641
+    second: 1:7 Shaded Twill_369
+  - first:
+      213: -1033443246204598345
+    second: 1:7 Shaded Twill_370
+  - first:
+      213: 1256011963280612335
+    second: 1:7 Shaded Twill_371
+  - first:
+      213: -9043524042819496974
+    second: 1:7 Shaded Twill_372
+  - first:
+      213: 7686676872051446344
+    second: 1:7 Shaded Twill_373
+  - first:
+      213: 5410580690023411468
+    second: 1:7 Shaded Twill_374
+  - first:
+      213: -1683725647705124237
+    second: 1:7 Shaded Twill_375
+  - first:
+      213: -2754799514217830866
+    second: 1:7 Shaded Twill_376
+  - first:
+      213: 171629582957209236
+    second: 1:7 Shaded Twill_377
+  - first:
+      213: -2450140640207551369
+    second: 1:7 Shaded Twill_378
+  - first:
+      213: -1494397555100463911
+    second: 1:7 Shaded Twill_379
+  - first:
+      213: 3011628441753629332
+    second: 1:7 Shaded Twill_380
+  - first:
+      213: -8398499735362732553
+    second: 1:7 Shaded Twill_381
+  - first:
+      213: 7040040013156532882
+    second: 1:7 Shaded Twill_382
+  - first:
+      213: 5781016929896741751
+    second: 1:7 Shaded Twill_383
+  - first:
+      213: -4671012129445018798
+    second: 1:7 Shaded Twill_384
+  - first:
+      213: 6990461680288678334
+    second: 1:7 Shaded Twill_385
+  - first:
+      213: 1762477943658612141
+    second: 1:7 Shaded Twill_386
+  - first:
+      213: 4616981766200375221
+    second: 1:7 Shaded Twill_387
+  - first:
+      213: 9101713601238767914
+    second: 1:7 Shaded Twill_388
+  - first:
+      213: -4696971669219181976
+    second: 1:7 Shaded Twill_389
+  - first:
+      213: 5074833489145783
+    second: 1:7 Shaded Twill_390
+  - first:
+      213: -7898982122366391239
+    second: 1:7 Shaded Twill_391
+  - first:
+      213: -2523292306090147554
+    second: 1:7 Shaded Twill_392
+  - first:
+      213: -6022188883100106345
+    second: 1:7 Shaded Twill_393
+  - first:
+      213: 1249870513867021257
+    second: 1:7 Shaded Twill_394
+  - first:
+      213: 6692670955429604032
+    second: 1:7 Shaded Twill_395
+  - first:
+      213: -4059684699466661452
+    second: 1:7 Shaded Twill_396
+  - first:
+      213: 3228473941600067330
+    second: 1:7 Shaded Twill_397
+  - first:
+      213: 1112714188409621093
+    second: 1:7 Shaded Twill_398
+  - first:
+      213: -7563803360634603147
+    second: 1:7 Shaded Twill_399
+  - first:
+      213: 2806476194012043766
+    second: 1:7 Shaded Twill_400
+  - first:
+      213: 8096128206967892655
+    second: 1:7 Shaded Twill_401
+  - first:
+      213: -2309371955292543060
+    second: 1:7 Shaded Twill_402
+  - first:
+      213: 6132633026587058757
+    second: 1:7 Shaded Twill_403
+  - first:
+      213: -7722131546363523805
+    second: 1:7 Shaded Twill_404
+  - first:
+      213: -1792878121639748485
+    second: 1:7 Shaded Twill_405
+  - first:
+      213: -3531637711380612212
+    second: 1:7 Shaded Twill_406
+  - first:
+      213: 7522604065673808828
+    second: 1:7 Shaded Twill_407
+  - first:
+      213: 1863319281723191308
+    second: 1:7 Shaded Twill_408
+  - first:
+      213: -1562637959501955865
+    second: 1:7 Shaded Twill_409
+  - first:
+      213: 372825516157996793
+    second: 1:7 Shaded Twill_410
+  - first:
+      213: 7369659284242064861
+    second: 1:7 Shaded Twill_411
+  - first:
+      213: 5677260706351976663
+    second: 1:7 Shaded Twill_412
+  - first:
+      213: -3423341715118739282
+    second: 1:7 Shaded Twill_413
+  - first:
+      213: -404322767621506020
+    second: 1:7 Shaded Twill_414
+  - first:
+      213: 7281226117992905165
+    second: 1:7 Shaded Twill_415
+  - first:
+      213: 1428776204796785834
+    second: 1:7 Shaded Twill_416
+  - first:
+      213: 8231272186181321292
+    second: 1:7 Shaded Twill_417
+  - first:
+      213: 2245591584581989263
+    second: 1:7 Shaded Twill_418
+  - first:
+      213: 2520501186344117812
+    second: 1:7 Shaded Twill_419
+  - first:
+      213: -7050264234144896798
+    second: 1:7 Shaded Twill_420
+  - first:
+      213: 4334579369778333357
+    second: 1:7 Shaded Twill_421
+  - first:
+      213: -1970229005930977020
+    second: 1:7 Shaded Twill_422
+  - first:
+      213: -8949437522124067794
+    second: 1:7 Shaded Twill_423
+  - first:
+      213: 9038370734630900016
+    second: 1:7 Shaded Twill_424
+  - first:
+      213: 5918720465070588824
+    second: 1:7 Shaded Twill_425
+  - first:
+      213: -2720050021343043972
+    second: 1:7 Shaded Twill_426
+  - first:
+      213: 956861206046454100
+    second: 1:7 Shaded Twill_427
+  - first:
+      213: 6317833007147058398
+    second: 1:7 Shaded Twill_428
+  - first:
+      213: 8333678049506554421
+    second: 1:7 Shaded Twill_429
+  - first:
+      213: 8503736376894078313
+    second: 1:7 Shaded Twill_430
+  - first:
+      213: -345223167356466856
+    second: 1:7 Shaded Twill_431
+  - first:
+      213: 360899420938118643
+    second: 1:7 Shaded Twill_432
+  - first:
+      213: 8922467192313304176
+    second: 1:7 Shaded Twill_433
+  - first:
+      213: -6290664614980013529
+    second: 1:7 Shaded Twill_434
+  - first:
+      213: 53568103074764872
+    second: 1:7 Shaded Twill_435
+  - first:
+      213: 4309485456680136889
+    second: 1:7 Shaded Twill_436
+  - first:
+      213: -4540632316531181230
+    second: 1:7 Shaded Twill_437
+  - first:
+      213: 3931354228185788662
+    second: 1:7 Shaded Twill_438
+  - first:
+      213: 4660143387870696480
+    second: 1:7 Shaded Twill_439
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 1:7 Shaded Twill_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e00e12d8a32d2b2f0800000000000000
+      internalID: -958472621758750706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1:7 Shaded Twill_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 40
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23665a321e99c42d0800000000000000
+      internalID: -3293088035269941710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1:7 Shaded Twill_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46bd7d4f237c02210800000000000000
+      internalID: 1306262913607523172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1:7 Shaded Twill_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e14bc4f5219fc4510800000000000000
+      internalID: 1534875430330086430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1:7 Shaded Twill_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ccd0b36363ec2120800000000000000
+      internalID: 2390535518240693446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1:7 Shaded Twill_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1a6f05ac91c1ed10800000000000000
+      internalID: 2153214975388117533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 1:7 Shaded Twill_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c59a45bc4b7a5bff0800000000000000
+      internalID: -20926228306024100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

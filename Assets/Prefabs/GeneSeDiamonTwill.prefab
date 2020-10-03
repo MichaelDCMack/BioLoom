@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5518273841004578764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5518273841004578766}
+  - component: {fileID: 5518273841004578765}
+  m_Layer: 0
+  m_Name: GeneSeDiamonTwill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5518273841004578766
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5518273841004578764}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5518273841004578765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5518273841004578764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ab3e1e3bdf349c9af572e6ff4ceb54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SetName: 1/7 Diamond Twill
+  sprites:
+  - {fileID: -8692102890015537474, guid: bdfb75d8d35cd4adebe0d77122480d92, type: 3}
+  - {fileID: 601058882678975841, guid: bdfb75d8d35cd4adebe0d77122480d92, type: 3}
+  - {fileID: -2689370318855445144, guid: bdfb75d8d35cd4adebe0d77122480d92, type: 3}
+  - {fileID: -9031474353600570221, guid: bdfb75d8d35cd4adebe0d77122480d92, type: 3}
+  - {fileID: -8809153324848314271, guid: bdfb75d8d35cd4adebe0d77122480d92, type: 3}
+  - {fileID: -6349519789336836170, guid: bdfb75d8d35cd4adebe0d77122480d92, type: 3}
+  - {fileID: -2918255890162222282, guid: bdfb75d8d35cd4adebe0d77122480d92, type: 3}
+  - {fileID: -6911981188343037337, guid: bdfb75d8d35cd4adebe0d77122480d92, type: 3}
+  - {fileID: 4501409815080471186, guid: bdfb75d8d35cd4adebe0d77122480d92, type: 3}
+  - {fileID: -379346292312719846, guid: bdfb75d8d35cd4adebe0d77122480d92, type: 3}
+  - {fileID: 3203500012548458018, guid: bdfb75d8d35cd4adebe0d77122480d92, type: 3}
+  - {fileID: 6371774555395909351, guid: bdfb75d8d35cd4adebe0d77122480d92, type: 3}
+  - {fileID: 8357096617600359396, guid: bdfb75d8d35cd4adebe0d77122480d92, type: 3}
+  - {fileID: -8375201645025100757, guid: bdfb75d8d35cd4adebe0d77122480d92, type: 3}
+  emptySprite: {fileID: -8692102890015537474, guid: bdfb75d8d35cd4adebe0d77122480d92,
+    type: 3}
+  collisionSprite: {fileID: -8375201645025100757, guid: bdfb75d8d35cd4adebe0d77122480d92,
+    type: 3}
+  height: 8
+  width: 8
+  useStartGene: 0
+  startGene: 0

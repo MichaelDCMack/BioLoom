@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5518273841004578764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5518273841004578766}
+  - component: {fileID: 5518273841004578765}
+  m_Layer: 0
+  m_Name: GeneSetTwill4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5518273841004578766
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5518273841004578764}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5518273841004578765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5518273841004578764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ab3e1e3bdf349c9af572e6ff4ceb54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SetName: 1/3 Twill
+  sprites:
+  - {fileID: -1000558492946427814, guid: d7e1d82de6b964b5a9a841100bfb3259, type: 3}
+  - {fileID: -2190427428649379320, guid: d7e1d82de6b964b5a9a841100bfb3259, type: 3}
+  - {fileID: -2552184692495374865, guid: d7e1d82de6b964b5a9a841100bfb3259, type: 3}
+  emptySprite: {fileID: -1000558492946427814, guid: d7e1d82de6b964b5a9a841100bfb3259,
+    type: 3}
+  collisionSprite: {fileID: -2552184692495374865, guid: d7e1d82de6b964b5a9a841100bfb3259,
+    type: 3}
+  height: 4
+  width: 4
+  useStartGene: 0
+  startGene: 0

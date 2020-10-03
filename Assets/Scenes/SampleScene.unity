@@ -1862,12 +1862,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 800, y: 1400}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2044,6 +2044,11 @@ MonoBehaviour:
   - {fileID: 7922120601326828189, guid: 4cb154466ca6d4f558a81794d637f642, type: 3}
   - {fileID: 1634758785544740792, guid: 9e6f039b82fd444a987c54a24190a4f8, type: 3}
   - {fileID: 5518273841004578765, guid: d99e319640c024b06b8a2134883f7fbd, type: 3}
+  - {fileID: 5518273841004578765, guid: 1e3c257be99034be4ac697e75e4304ce, type: 3}
+  - {fileID: 5518273841004578765, guid: 0ee46dc56cfa5496685393dcb9184d86, type: 3}
+  - {fileID: 5518273841004578765, guid: c22d10b0bb58544288c76156e4e1dea8, type: 3}
+  - {fileID: 5518273841004578765, guid: d9d5f44933ec14105a151c14decbd7ef, type: 3}
+  - {fileID: 5518273841004578765, guid: 6a8b62bd3d817475d98af7c29db53d5b, type: 3}
   width: 64
   height: 128
   currentGenerationIndex: 0
@@ -2053,7 +2058,7 @@ MonoBehaviour:
   shuffleTileMapping: 0
   useSeed: 0
   seed: 0
-  populate: 0
+  populate: 1
   geneSetIndex: 0
   shuffleIndexArray: 1
   mutationType: 1
