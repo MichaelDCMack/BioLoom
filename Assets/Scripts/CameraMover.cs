@@ -7,7 +7,7 @@ public class CameraMover : MonoBehaviour
     Vector3 lastPosition;
 
     public float mouseDragFactor = 0.005f;
-    public float cameraSizeScrollFactor = 5f;
+    public float cameraSizeScrollFactor = 1f;
 
     Vector3 initialPosition;
     float initialSize;
@@ -66,7 +66,7 @@ public class CameraMover : MonoBehaviour
         {
             //Debug.Log("Scroll Value of " + s);
 
-            camera.orthographicSize += s * cameraSizeScrollFactor;
+            camera.orthographicSize *= 1f + s * cameraSizeScrollFactor;
             if(camera.orthographicSize < 1)
             {
                 camera.orthographicSize = 1;
