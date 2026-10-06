@@ -363,7 +363,7 @@ MonoBehaviour:
   m_CaptionImage: {fileID: 0}
   m_ItemText: {fileID: 1632867333}
   m_ItemImage: {fileID: 0}
-  m_Value: 1
+  m_Value: 4
   m_Options:
     m_Options:
     - m_Text: None
@@ -2061,7 +2061,7 @@ MonoBehaviour:
   populate: 1
   geneSetIndex: 0
   shuffleIndexArray: 1
-  mutationType: 1
+  mutationType: 4
 --- !u!4 &836111527
 Transform:
   m_ObjectHideFlags: 0

@@ -465,14 +465,15 @@ public class TileSpawner : MonoBehaviour
                 }
                 case Cell.CellStatus.Normal:
                 {
-                    //if we're mutating, then return
+                    // resolve the collision, but keep reproducing - per Barricelli,
+                    // reproduction depends only on the row above, not on collisions
                     Mutate(start, destination, k);
-                    return;
+                    break;
                 }
                 case Cell.CellStatus.Collision:
                 {
-                    //if this is a collision from the past, then return
-                    return;
+                    // the collision sign remains
+                    break;
                 }
             }
 
@@ -525,6 +526,12 @@ public class TileSpawner : MonoBehaviour
             }
             case MutationType.Barricelli:
             {
+                if (destination.Gene == start.Gene)
+                {
+                    // identical numbers colliding: one of them remains
+                    break;
+                }
+
                 if (cells[k, currentGenerationIndex].Status == Cell.CellStatus.Normal)
                 {
                     AssignGeneToTile(k, nextGenerationIndex, 0, Cell.CellStatus.Collision);
