@@ -11,6 +11,8 @@ public class TileSpawner : MonoBehaviour
     public GameObject widthField;
     public GameObject geneSetDropdown;
     public GameObject brushPreview;
+    public GameObject maxReproductionsField;
+    public GameObject shuffleOrderToggle;
     public TMP_Text brushLabel;
     public TMP_Text generationText;
     public TMP_Text pauseButtonText;
@@ -149,6 +151,20 @@ public class TileSpawner : MonoBehaviour
         }
     }
 
+    public void SetMaxReproductions(string s)
+    {
+        if (int.TryParse(s, out int result) && result > 0)
+        {
+            maxReproductions = result;
+        }
+        maxReproductionsField.GetComponent<TMP_InputField>().SetTextWithoutNotify(maxReproductions.ToString());
+    }
+
+    public void SetShuffleIndexArray(bool shuffle)
+    {
+        shuffleIndexArray = shuffle;
+    }
+
     public void SetShuffleTileMapping(bool shuffle)
     {
         shuffleTileMapping = shuffle;
@@ -266,6 +282,15 @@ public class TileSpawner : MonoBehaviour
         dropdown.value = 0;
 
         seedInputField.SetActive(useSeed);
+
+        if (maxReproductionsField != null)
+        {
+            maxReproductionsField.GetComponent<TMP_InputField>().SetTextWithoutNotify(maxReproductions.ToString());
+        }
+        if (shuffleOrderToggle != null)
+        {
+            shuffleOrderToggle.GetComponent<Toggle>().SetIsOnWithoutNotify(shuffleIndexArray);
+        }
 
         Initialize();
     }
