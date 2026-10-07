@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class TileSpawner : MonoBehaviour
@@ -140,7 +141,7 @@ public class TileSpawner : MonoBehaviour
 
         if (use)
         {
-            InputField f = seedInputField.GetComponent<InputField>();
+            TMP_InputField f = seedInputField.GetComponent<TMP_InputField>();
             Debug.Assert(f != null);
 
             f.SetTextWithoutNotify(seed.ToString());
@@ -157,18 +158,18 @@ public class TileSpawner : MonoBehaviour
     {
         _camera = Camera.main;
         
-        var field = heightField.GetComponent<InputField>();
+        var field = heightField.GetComponent<TMP_InputField>();
         field.SetTextWithoutNotify(height.ToString());
 
-        field = widthField.GetComponent<InputField>();
+        field = widthField.GetComponent<TMP_InputField>();
         field.SetTextWithoutNotify(width.ToString());
 
         FPSWatcher = GetComponent<FPSWatcher>();
 
-        var dropdown = geneSetDropdown.GetComponent<Dropdown>();
+        var dropdown = geneSetDropdown.GetComponent<TMP_Dropdown>();
         foreach (var geneSet in geneSets)
         {
-            dropdown.options.Add(new Dropdown.OptionData(geneSet.SetName));
+            dropdown.options.Add(new TMP_Dropdown.OptionData(geneSet.SetName));
         }
 
         dropdown.value = 0;
@@ -196,7 +197,7 @@ public class TileSpawner : MonoBehaviour
 
         {
             Debug.Assert(currentSeedText != null);
-            Text t = currentSeedText.GetComponent<Text>();
+            TMP_Text t = currentSeedText.GetComponent<TMP_Text>();
             Debug.Assert(t != null);
 
             t.text = "Seed: " + seed;
