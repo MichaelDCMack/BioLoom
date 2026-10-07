@@ -70,6 +70,10 @@ public class TileSpawner : MonoBehaviour
     Cell[,] cells;
     GameObject[,] chunks;
 
+    // size of the grid built by the last Run; width/height are the settings for the next Run
+    int GridWidth => cells.GetLength(0);
+    int GridHeight => cells.GetLength(1);
+
     int textureDimensionX;
     int textureDimensionY;
 
@@ -85,14 +89,20 @@ public class TileSpawner : MonoBehaviour
 
     public void SetNewWidth(string s)
     {
-        width = int.Parse(s);
-        Debug.Assert(width > 0);
+        if (int.TryParse(s, out int result) && result > 0)
+        {
+            width = result;
+        }
+        widthField.GetComponent<TMP_InputField>().SetTextWithoutNotify(width.ToString());
     }
 
     public void SetNewHeight(string s)
     {
-        height = int.Parse(s);
-        Debug.Assert(height > 0);
+        if (int.TryParse(s, out int result) && result > 0)
+        {
+            height = result;
+        }
+        heightField.GetComponent<TMP_InputField>().SetTextWithoutNotify(height.ToString());
     }
 
     public void SetSeed(string s)
@@ -102,6 +112,7 @@ public class TileSpawner : MonoBehaviour
         {
             seed = result;
         }
+        seedInputField.GetComponent<TMP_InputField>().SetTextWithoutNotify(seed.ToString());
     }
 
     public void Save()
@@ -320,7 +331,7 @@ public class TileSpawner : MonoBehaviour
     {
         if (generationText != null)
         {
-            generationText.text = "Generation " + currentGenerationIndex + " / " + (height - 1);
+            generationText.text = "Generation " + currentGenerationIndex + " / " + (GridHeight - 1);
         }
     }
 
@@ -382,13 +393,13 @@ public class TileSpawner : MonoBehaviour
             int x = (int) worldPosition.x / GeneSet.width;
             int y = (int) worldPosition.y / GeneSet.height;
 
-            if (x >= 0 && x < width && y >= 0 && y < height)
+            if (x >= 0 && x < GridWidth && y >= 0 && y < GridHeight)
             {
                 AssignGeneToTile(x, y, geneBrushIndex + GeneSet.MinGene, Cell.CellStatus.Normal);
 
-                for (int i = 0; i < width; ++i)
+                for (int i = 0; i < GridWidth; ++i)
                 {
-                    for (int j = y + 1; j < height; ++j)
+                    for (int j = y + 1; j < GridHeight; ++j)
                     {
                         AssignGeneToTile(i, j, 0, Cell.CellStatus.Empty);
                     }
@@ -430,7 +441,7 @@ public class TileSpawner : MonoBehaviour
 
     int RunBarricelli()
     {
-        if(nextGenerationIndex >= height)
+        if(nextGenerationIndex >= GridHeight)
         {
             return 0;
         }
@@ -447,8 +458,8 @@ public class TileSpawner : MonoBehaviour
     {
         rowStates[currentGenerationIndex] = Random.state;
         
-        int[] indexArray = new int[width];
-        for (int i = 0; i < width; ++i)
+        int[] indexArray = new int[GridWidth];
+        for (int i = 0; i < GridWidth; ++i)
         {
             indexArray[i] = i;
         }
@@ -458,7 +469,7 @@ public class TileSpawner : MonoBehaviour
             Extensions.Shuffle(indexArray);
         }
 
-        for(int i = 0; i < width; ++i)
+        for(int i = 0; i < GridWidth; ++i)
         {
             Shift(indexArray[i]);
         }
@@ -480,7 +491,7 @@ public class TileSpawner : MonoBehaviour
         do
         {
             int k = i + current.Gene;
-            k = Extensions.Mod(k, width);
+            k = Extensions.Mod(k, GridWidth);
  
             Cell destination = cells[k, nextGenerationIndex];
 
@@ -583,7 +594,7 @@ public class TileSpawner : MonoBehaviour
         {
             ++rCount;
             ++r;
-            r = Extensions.Mod(r, width);
+            r = Extensions.Mod(r, GridWidth);
         }
 
         int lCount = 0;
@@ -593,7 +604,7 @@ public class TileSpawner : MonoBehaviour
         {
             ++lCount;
             --l;
-            l = Extensions.Mod(l, width);
+            l = Extensions.Mod(l, GridWidth);
         }
 
         bool bothPositive = cells[r, currentGenerationIndex].Gene > 0 && cells[l, currentGenerationIndex].Gene > 0;
