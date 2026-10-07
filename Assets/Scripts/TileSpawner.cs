@@ -209,6 +209,19 @@ public class TileSpawner : MonoBehaviour
         }
     }
 
+    static bool PointerOverUIOrTyping()
+    {
+        var es = UnityEngine.EventSystems.EventSystem.current;
+        if (es == null)
+        {
+            return false;
+        }
+
+        var selected = es.currentSelectedGameObject;
+        bool typing = selected != null && selected.TryGetComponent(out TMP_InputField field) && field.isFocused;
+        return typing || es.IsPointerOverGameObject();
+    }
+
     private void UpdatePauseText()
     {
         if (pauseButtonText != null)
@@ -443,7 +456,7 @@ public class TileSpawner : MonoBehaviour
     {
         bool applyTextures = false;
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && !PointerOverUIOrTyping())
         {
             Vector3 currentPosition = Input.mousePosition;
             currentPosition.z = -_camera.transform.position.z;

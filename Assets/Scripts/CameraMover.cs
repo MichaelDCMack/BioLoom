@@ -1,10 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CameraMover : MonoBehaviour
 {
     Vector3 lastPosition;
+    bool dragging;
+
+    static bool PointerOverUI()
+    {
+        return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+    }
 
     public float mouseDragFactor = 0.005f;
     public float cameraSizeScrollFactor = 1f;
@@ -41,13 +48,12 @@ public class CameraMover : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Button 0 Down.");
-
+            // only pan when the press starts on the grid, not on the UI
+            dragging = !PointerOverUI();
             lastPosition = Input.mousePosition;
         }
-        if (Input.GetMouseButton(0))
+        if (dragging && Input.GetMouseButton(0))
         {
-            //Debug.Log("Button 0.");
             Vector3 currentPosition = Input.mousePosition;
             Vector3 delta = currentPosition - lastPosition;
             lastPosition = currentPosition;
@@ -56,13 +62,11 @@ public class CameraMover : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-            Debug.Log("Button 0 Up.");
-
-
+            dragging = false;
         }
 
         float s = Input.GetAxis("Mouse ScrollWheel");
-        if (s != 0)
+        if (s != 0 && !PointerOverUI())
         {
             //Debug.Log("Scroll Value of " + s);
 
