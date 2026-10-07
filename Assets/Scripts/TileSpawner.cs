@@ -11,6 +11,8 @@ public class TileSpawner : MonoBehaviour
     public GameObject widthField;
     public GameObject geneSetDropdown;
     public GameObject brushPreview;
+    public TMP_Text brushLabel;
+    public TMP_Text generationText;
 
     public GeneSet[] geneSets;
 
@@ -153,6 +155,12 @@ public class TileSpawner : MonoBehaviour
         Initialize();
     }
 
+    public void CopySeed()
+    {
+        GUIUtility.systemCopyBuffer = seed.ToString();
+        currentSeedText.GetComponent<TMP_Text>().text = "Seed: " + seed + " (copied)";
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -173,6 +181,8 @@ public class TileSpawner : MonoBehaviour
         }
 
         dropdown.value = 0;
+
+        seedInputField.SetActive(useSeed);
 
         Initialize();
     }
@@ -290,13 +300,28 @@ public class TileSpawner : MonoBehaviour
         {
             t.Apply();
         }
+
+        UpdateGenerationText();
     }
 
     private void UpdateGeneBrushPreview()
     {
         var preview = brushPreview.GetComponent<Image>();
         preview.sprite = GeneSet.sprites[geneBrushIndex];
-        preview.SetNativeSize();
+        preview.preserveAspect = true;
+
+        if (brushLabel != null)
+        {
+            brushLabel.text = "Gene " + (geneBrushIndex + GeneSet.MinGene);
+        }
+    }
+
+    private void UpdateGenerationText()
+    {
+        if (generationText != null)
+        {
+            generationText.text = "Generation " + currentGenerationIndex + " / " + (height - 1);
+        }
     }
 
     void AssignGeneToTile(int x, int y, int gene, Cell.CellStatus status)
@@ -398,6 +423,8 @@ public class TileSpawner : MonoBehaviour
             {
                 t.Apply();
             }
+
+            UpdateGenerationText();
         }
     }
 
