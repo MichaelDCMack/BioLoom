@@ -13,6 +13,15 @@ public class TileSpawner : MonoBehaviour
     public GameObject brushPreview;
     public TMP_Text brushLabel;
     public TMP_Text generationText;
+    public TMP_Text pauseButtonText;
+    public TMP_Text speedText;
+
+    public bool paused = false;
+
+    // speed slider positions in generations per second; 0 = as fast as the frame rate allows
+    static readonly float[] SpeedSteps = { 1, 2, 5, 10, 20, 50, 100, 200, 0 };
+    public float generationsPerSecond = 0;
+    float stepBudget;
 
     public GeneSet[] geneSets;
 
@@ -163,7 +172,57 @@ public class TileSpawner : MonoBehaviour
 
     public void Run()
     {
+        paused = false;
+        UpdatePauseText();
         Initialize();
+    }
+
+    public void TogglePause()
+    {
+        paused = !paused;
+        stepBudget = 0;
+        UpdatePauseText();
+        UpdateGenerationText();
+    }
+
+    public void Step()
+    {
+        paused = true;
+        UpdatePauseText();
+
+        if (RunBarricelli() > 0)
+        {
+            ApplyTextures();
+        }
+        UpdateGenerationText();
+    }
+
+    public void SetSpeedIndex(float index)
+    {
+        int i = Mathf.Clamp(Mathf.RoundToInt(index), 0, SpeedSteps.Length - 1);
+        generationsPerSecond = SpeedSteps[i];
+        stepBudget = 0;
+
+        if (speedText != null)
+        {
+            speedText.text = generationsPerSecond > 0 ? "Speed: " + generationsPerSecond + " gen/s" : "Speed: Max";
+        }
+    }
+
+    private void UpdatePauseText()
+    {
+        if (pauseButtonText != null)
+        {
+            pauseButtonText.text = paused ? "Resume" : "Pause";
+        }
+    }
+
+    private void ApplyTextures()
+    {
+        foreach (Texture2D t in textures)
+        {
+            t.Apply();
+        }
     }
 
     public void CopySeed()
@@ -331,7 +390,7 @@ public class TileSpawner : MonoBehaviour
     {
         if (generationText != null)
         {
-            generationText.text = "Generation " + currentGenerationIndex + " / " + (GridHeight - 1);
+            generationText.text = "Generation " + currentGenerationIndex + " / " + (GridHeight - 1) + (paused ? " · paused" : "");
         }
     }
 
@@ -417,11 +476,25 @@ public class TileSpawner : MonoBehaviour
             }
         }
 
-        int allowedOperations = FPSWatcher.AllowedOperations;
+        int allowedOperations = 0;
+        if (!paused)
+        {
+            allowedOperations = FPSWatcher.AllowedOperations;
+
+            if (generationsPerSecond > 0)
+            {
+                stepBudget += generationsPerSecond * Time.deltaTime;
+                int steps = (int)stepBudget;
+                stepBudget -= steps;
+                allowedOperations = Mathf.Min(steps, allowedOperations);
+            }
+        }
+
         for (int operations = 0; operations < allowedOperations; ++operations)
         {
             if (RunBarricelli() == 0)
             {
+                stepBudget = 0;
                 break;
             }
 
@@ -430,11 +503,7 @@ public class TileSpawner : MonoBehaviour
 
         if (applyTextures)
         {
-            foreach (Texture2D t in textures)
-            {
-                t.Apply();
-            }
-
+            ApplyTextures();
             UpdateGenerationText();
         }
     }
